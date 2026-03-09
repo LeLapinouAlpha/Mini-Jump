@@ -7,8 +7,7 @@ public class PlayerMovements : MonoBehaviour
     [Header("Components references")]
     public CharacterController characterController;
     public InputAction moveAction;
-    public Animator animator;
-    public SpriteRenderer spriteRenderer;
+    public PlayerAnimations playerAnimations;
 
     [Header("Controls settings")]
     public float movementSpeed = 0.02f;
@@ -17,8 +16,7 @@ public class PlayerMovements : MonoBehaviour
     {
         // Get components attached to the player
         this.characterController = this.GetComponent<CharacterController>();
-        this.animator = this.GetComponent<Animator>();
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+        this.playerAnimations = this.GetComponent<PlayerAnimations>();
 
         // Find input actions
         this.moveAction = InputSystem.actions.FindAction("Move");
@@ -26,20 +24,20 @@ public class PlayerMovements : MonoBehaviour
 
     void Update()
     {
-        // Read move input and move the character and update the isMoving state
+        // Read move input
         var movement = this.moveAction.ReadValue<Vector2>();
         if (movement != Vector2.zero)
         {
+            // Move the character
             this.characterController.Move(this.movementSpeed * movement.x * Vector2.right);
 
-            this.animator.SetBool("IsWalking", true);
-
-            // Flip the character sprite based on the movement direction
-            this.spriteRenderer.flipX = movement.x < 0;
+            // Play walk animation
+            this.playerAnimations.PlayWalkAnimation(true);
+            this.playerAnimations.FlipSprite(movement.x < 0);
         }
         else
         {
-            this.animator.SetBool("IsWalking", false);
+            this.playerAnimations.PlayWalkAnimation(false);
         }
     }
 }
