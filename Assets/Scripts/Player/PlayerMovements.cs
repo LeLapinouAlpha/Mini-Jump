@@ -1,43 +1,91 @@
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovements : MonoBehaviour
 {
     [Header("Components references")]
-    public CharacterController characterController;
     public InputAction moveAction;
+    public InputAction jumpAction;
     public PlayerAnimations playerAnimations;
+    public Rigidbody2D playerRigidbody;
+    public CapsuleCollider2D playerCollider;
 
     [Header("Controls settings")]
-    public float movementSpeed = 0.02f;
+    public float walkSpeed = 1f;
+    public float jumpForce = 0.2f;
+
+    [Header("Ground check")]
+    public LayerMask groundLayers;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.1f;
+
+    [Header("States")]
+    public bool isJumping;
+    public bool isGrounded;
+    public Vector2 movement;
+
+    private void MovePlayer()
+    {
+        // Move player horizontaly
+        this.playerRigidbody.linearVelocity = this.movement;
+
+        // Add jump force
+        if (this.isJumping)
+        {
+            this.playerRigidbody.AddForce(new Vector2(0, this.jumpForce), ForceMode2D.Impulse);
+            this.isJumping = false;
+            this.playerAnimations.PlayJumpAnimation(true);
+        }
+    }
 
     void Start()
     {
         // Get components attached to the player
-        this.characterController = this.GetComponent<CharacterController>();
         this.playerAnimations = this.GetComponent<PlayerAnimations>();
+        this.playerRigidbody = this.GetComponent<Rigidbody2D>();
+        this.playerCollider = this.GetComponent<CapsuleCollider2D>();
 
         // Find input actions
         this.moveAction = InputSystem.actions.FindAction("Move");
+        this.jumpAction = InputSystem.actions.FindAction("Jump");
+    }
+
+    private void FixedUpdate()
+    {
+        this.isGrounded = Physics2D.OverlapCircle(this.groundCheck.position, this.groundCheckRadius, this.groundLayers);
+        this.MovePlayer();
     }
 
     void Update()
     {
         // Read move input
-        var movement = this.moveAction.ReadValue<Vector2>();
-        if (movement != Vector2.zero)
+        var moveInput = this.moveAction.ReadValue<Vector2>();
+        this.movement = moveInput * this.walkSpeed;
+        if (moveInput != Vector2.zero)
         {
-            // Move the character
-            this.characterController.Move(this.movementSpeed * movement.x * Vector2.right);
-
             // Play walk animation
             this.playerAnimations.PlayWalkAnimation(true);
-            this.playerAnimations.FlipSprite(movement.x < 0);
+            this.playerAnimations.FlipSprite(moveInput.x < 0);
         }
         else
         {
             this.playerAnimations.PlayWalkAnimation(false);
         }
+
+        if (this.jumpAction.IsPressed() && this.isGrounded)
+        {
+            this.isJumping = true;
+        }
+        else if (this.isGrounded)
+        {
+            this.playerAnimations.PlayJumpAnimation(false);
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.groundCheck.position, this.groundCheckRadius);
     }
 }

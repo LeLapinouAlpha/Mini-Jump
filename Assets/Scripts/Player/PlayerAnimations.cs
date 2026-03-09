@@ -11,6 +11,11 @@ public class PlayerAnimations : MonoBehaviour
         this.animator.SetBool("IsWalking", value);
     }
 
+    public void PlayJumpAnimation(bool value)
+    {
+        this.animator.SetBool("IsJumping", value);
+    }
+
     public void FlipSprite(bool flipX, bool flipY = false)
     {
         this.spriteRenderer.flipX = flipX;
