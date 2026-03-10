@@ -373,11 +373,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a96b33ae9802134aac10b001a6a2e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovements
-  moveAction:
-    m_Name: Move
+  playerAnimations: {fileID: 0}
+  playerRigidbody: {fileID: 0}
+  playerCollider: {fileID: 0}
+  walkAction:
+    m_Name: Walk
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d6ca4abd-6c16-4ba7-bf2d-08b9f66520d3
+    m_Id: 6bec4707-7db7-49a7-81b4-88ae127f56c2
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -391,21 +394,30 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  playerAnimations: {fileID: 0}
-  playerRigidbody: {fileID: 0}
-  playerCollider: {fileID: 0}
+  sprintAction:
+    m_Name: Sprint
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a603efcf-fc3a-4d8e-b14b-3672a8a80c0b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   walkSpeed: 3
-  jumpForce: 7
-  defaultGravityScale: 3
-  fallGravityScale: 5
+  jumpForce: 15
+  defaultGravityScale: 1
+  fallGravityScale: 3
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 670181925}
   groundCheckRadius: 0.1
-  isJumping: 0
-  isGrounded: 0
   movement: {x: 0, y: 0}
+  isGrounded: 0
+  isWalking: 0
+  isJumping: 0
+  isFalling: 0
+  isSprinting: 0
 --- !u!114 &721962287
 MonoBehaviour:
   m_ObjectHideFlags: 0
