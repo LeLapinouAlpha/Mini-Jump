@@ -72,7 +72,7 @@ public class PlayerMovements : MonoBehaviour
 
     void Update()
     {
-        // Get movement input and update player states with animations
+        // Get walk input and update player states with animations
         var walkInput = this.walkAction.ReadValue<Vector2>();
         this.movement.x = this.walkSpeed * walkInput.x;
         this.isWalking = Mathf.Abs(walkInput.x) > 1e-6f;
@@ -96,10 +96,9 @@ public class PlayerMovements : MonoBehaviour
 
         // Check if player is sprinting and update states with animations
         this.isSprinting = this.sprintAction.IsPressed() && this.isWalking;
-        if (this.isSprinting)
-        {
-            this.movement.x *= this.sprintSpeedMultiplier;
-        }
+        this.movement.x *= this.isSprinting ? this.sprintSpeedMultiplier : 1f;
+ 
+        this.playerAnimations.PlaySprintAnimation(this.isSprinting);
     }
 
     private void OnDrawGizmos()

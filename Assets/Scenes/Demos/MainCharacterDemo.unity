@@ -404,6 +404,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   walkSpeed: 3
+  sprintSpeedMultiplier: 2
   jumpForce: 15
   defaultGravityScale: 1
   fallGravityScale: 3
