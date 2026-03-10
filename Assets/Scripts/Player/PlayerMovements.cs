@@ -11,10 +11,10 @@ public class PlayerMovements : MonoBehaviour
     public CapsuleCollider2D playerCollider;
 
     [Header("Controls settings")]
-    public float walkSpeed = 1f;
-    public float jumpForce = 0.2f;
-    public float defaultGravityScale = 3f;
-    public float fallGravityScale = 5f;
+    public float walkSpeed = 3f;
+    public float jumpForce = 7f;
+    public float defaultGravityScale = 1f;
+    public float fallGravityScale = 3f;
 
     [Header("Ground check")]
     public LayerMask groundLayers;
@@ -22,23 +22,23 @@ public class PlayerMovements : MonoBehaviour
     public float groundCheckRadius = 0.1f;
 
     [Header("States")]
-    public bool isJumping;
-    public bool isGrounded;
-    public bool isFalling;
     public Vector2 movement;
+    public bool isGrounded;
+    public bool isWalking;
+    public bool isJumping;
+    public bool isFalling;
 
     private void MovePlayer()
     {
         // Move player
         this.playerRigidbody.linearVelocity = new Vector2(this.movement.x, this.playerRigidbody.linearVelocityY);
 
-        // Add jump force
+        // Add jump force if player is jumping
         if (this.isJumping)
         {
             this.playerRigidbody.AddForce(new Vector2(0, this.jumpForce), ForceMode2D.Impulse);
             this.playerRigidbody.gravityScale = this.fallGravityScale;
             this.isJumping = false;
-            this.playerAnimations.PlayJumpAnimation(true);
         }
     }
 
@@ -53,43 +53,38 @@ public class PlayerMovements : MonoBehaviour
         this.moveAction = InputSystem.actions.FindAction("Move");
         this.jumpAction = InputSystem.actions.FindAction("Jump");
 
+        // Set default gravity scale
         this.playerRigidbody.gravityScale = this.defaultGravityScale;
     }
 
     private void FixedUpdate()
     {
         this.isGrounded = Physics2D.OverlapCircle(this.groundCheck.position, this.groundCheckRadius, this.groundLayers);
+
         this.MovePlayer();
     }
 
     void Update()
     {
-        // Read move input
+        // Get movement input and update player states with animations
         var moveInput = this.moveAction.ReadValue<Vector2>();
         this.movement.x = this.walkSpeed * moveInput.x;
-        if (moveInput != Vector2.zero)
-        {
-            // Play walk animation
-            this.playerAnimations.PlayWalkAnimation(true);
-            this.playerAnimations.FlipSprite(moveInput.x < 0);
-        }
-        else
-        {
-            this.playerAnimations.PlayWalkAnimation(false);
-        }
+        this.isWalking = Mathf.Abs(moveInput.x) > 1e-6f;
+        this.playerAnimations.PlayWalkAnimation(this.isWalking);
+        this.playerAnimations.FlipSprite(moveInput.x < 0);
 
-        if (this.jumpAction.IsPressed() && this.isGrounded)
+        // Check if player is jumping and update states with animations
+        this.isJumping = this.jumpAction.IsPressed() && this.isGrounded;
+        this.playerAnimations.PlayJumpAnimation(this.isJumping);
+
+        // Check if player is grounded and update gravity scale and vertical velocity
+        if (this.isGrounded)
         {
-            this.isJumping = true;
-        }
-        else if (this.isGrounded)
-        {
-            this.playerAnimations.PlayJumpAnimation(false);
             this.playerRigidbody.gravityScale = this.defaultGravityScale;
             this.playerRigidbody.linearVelocity = new Vector2(this.playerRigidbody.linearVelocity.x, 0f);
         }
 
-        // Check if player is falling
+        // Check if player is falling and update states with animations
         this.isFalling = this.playerRigidbody.linearVelocity.y < 0 && !this.isGrounded;
         this.playerAnimations.PlayFallingAnimation(this.isFalling);
     }
