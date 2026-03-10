@@ -24,6 +24,7 @@ public class PlayerMovements : MonoBehaviour
     [Header("States")]
     public bool isJumping;
     public bool isGrounded;
+    public bool isFalling;
     public Vector2 movement;
 
     private void MovePlayer()
@@ -88,6 +89,9 @@ public class PlayerMovements : MonoBehaviour
             this.playerRigidbody.linearVelocity = new Vector2(this.playerRigidbody.linearVelocity.x, 0f);
         }
 
+        // Check if player is falling
+        this.isFalling = this.playerRigidbody.linearVelocity.y < 0 && !this.isGrounded;
+        this.playerAnimations.PlayFallingAnimation(this.isFalling);
     }
 
     private void OnDrawGizmos()
