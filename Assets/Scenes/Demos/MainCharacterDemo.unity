@@ -228,11 +228,12 @@ MonoBehaviour:
   objectToFollow: {fileID: 721962284}
   followHorizontal: 1
   followVertical: 0
-  timeOffset: 0.3
+  timeOffset: 0.2
   pixelSnappingEnabled: 0
   pixelsPerUnit: 64
   followTargetPos: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
+  logicalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &615123612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +560,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4

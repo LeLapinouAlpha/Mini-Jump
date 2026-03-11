@@ -17,23 +17,33 @@ public class CameraFollow : MonoBehaviour
     [Header("States")]
     public Vector3 followTargetPos = Vector3.zero;
     public Vector3 velocity = Vector3.zero;
+    public Vector3 logicalPosition = Vector3.zero;
+
 
     private void Follow()
     {
         if (this.objectToFollow != null)
         {
-            // Follow the target position, and optionnaly ignore the horizontal and/or vertical axis
-            this.followTargetPos.x = this.followHorizontal ? this.objectToFollow.position.x : this.transform.position.x;
-            this.followTargetPos.y = this.followVertical ? this.objectToFollow.position.y : this.transform.position.y;
+            // Compute target
+            this.followTargetPos.x = this.followHorizontal ? this.objectToFollow.position.x : this.logicalPosition.x;
+            this.followTargetPos.y = this.followVertical ? this.objectToFollow.position.y : this.logicalPosition.y;
+            this.followTargetPos.z = this.logicalPosition.z;
 
-            // Smoothly move the camera
-            var pos = Vector3.SmoothDamp(this.transform.position, this.followTargetPos, ref this.velocity, this.timeOffset);
+            // Smooth logical camera movement
+            this.logicalPosition = Vector3.SmoothDamp(
+                this.logicalPosition,
+                this.followTargetPos,
+                ref this.velocity,
+                this.timeOffset
+            );
 
-            // Pixel snapping to avoid subpixel rendering
+            var pos = this.logicalPosition;
+
+            // Pixel snapping only for rendering
             if (this.pixelSnappingEnabled)
             {
-                pos.x = Mathf.Round(pos.x * pixelsPerUnit) / pixelsPerUnit;
-                pos.y = Mathf.Round(pos.y * pixelsPerUnit) / pixelsPerUnit;
+                pos.x = Mathf.Round(pos.x * this.pixelsPerUnit) / this.pixelsPerUnit;
+                pos.y = Mathf.Round(pos.y * this.pixelsPerUnit) / this.pixelsPerUnit;
             }
 
             this.transform.position = pos;
@@ -42,7 +52,8 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        this.followTargetPos.z = this.transform.position.z;
+        this.logicalPosition = this.transform.position;
+        this.followTargetPos = this.transform.position;
 
         Follow();
     }
