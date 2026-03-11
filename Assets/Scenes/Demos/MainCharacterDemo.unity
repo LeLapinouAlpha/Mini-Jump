@@ -228,7 +228,9 @@ MonoBehaviour:
   objectToFollow: {fileID: 721962284}
   followHorizontal: 1
   followVertical: 0
-  timeOffset: 0.2
+  timeOffset: 0.3
+  pixelSnappingEnabled: 0
+  pixelsPerUnit: 64
   followTargetPos: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &615123612
@@ -300,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 670181924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -419,7 +421,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.15, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 670181925}
@@ -532,7 +534,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.26, y: 0.39}
+  m_Size: {x: 0.40625, y: 0.609375}
   m_Direction: 0
 --- !u!50 &721962289
 Rigidbody2D:
