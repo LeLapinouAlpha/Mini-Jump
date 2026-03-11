@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Script: {fileID: 11500000, guid: 946062a9cdeefa14cb19773dbb35f10e, type: 3}
   m_Name: Dirt Rule Tile
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.RuleTile
   m_DefaultSprite: {fileID: -8274115365793923523, guid: c558d343faf9618429af19865fa89701, type: 3}
@@ -280,3 +280,7 @@ MonoBehaviour:
     - {x: 0, y: 1, z: 0}
     - {x: 0, y: -1, z: 0}
     m_RuleTransform: 0
+  alwaysConnect: 1
+  tilesToConnect:
+  - {fileID: 11400000, guid: 442ad41c7bd96ce4db321bf628cd4e49, type: 2}
+  checkSelf: 1
