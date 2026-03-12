@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovements : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerMovements : MonoBehaviour
     public float verticalWallJumpForce = 7f;
     public float defaultGravityScale = 1f;
     public float fallGravityScale = 3f;
+    public bool isWallSliding;
+    public float wallSlidingSpeed = 2f;
 
     [Header("Ground check")]
     public LayerMask groundLayers;
@@ -42,9 +45,7 @@ public class PlayerMovements : MonoBehaviour
     public bool isSprinting;
     public bool isTouchingWall;
     public Vector2 wallNormal;
-    public Vector2 wallJumpDirection;
     public Vector2 wallJumpForce;
-    public bool jumpRequested;
 
     private void FindComponents()
     {
@@ -99,6 +100,11 @@ public class PlayerMovements : MonoBehaviour
         this.isGroundJumping = false;
     }
 
+    private void WallSlide()
+    {
+        this.playerRigidbody.linearVelocityY = Mathf.Clamp(this.playerRigidbody.linearVelocity.y, -this.wallSlidingSpeed, float.MaxValue);
+    }
+
     private void WallJump()
     {
         // TODO
@@ -110,6 +116,11 @@ public class PlayerMovements : MonoBehaviour
         if (this.isGroundJumping)
         {
             this.GroundJump();
+        }
+
+        if (this.isWallSliding)
+        {
+            this.WallSlide();
         }
 
         // Move player
@@ -145,13 +156,18 @@ public class PlayerMovements : MonoBehaviour
         this.playerAnimations.PlayJumpAnimation(this.isGroundJumping);
     }
 
+    private void UpdateWallSlide()
+    {
+        this.isWallSliding = this.isTouchingWall && !this.isGrounded && this.isWalking;
+    }
+
     private void UpdateWallJump()
     {
         // TODO
         if (this.isTouchingWall && !this.isGrounded)
         {
-            this.wallJumpDirection = new Vector2(this.wallNormal.x, 1).normalized;
-            this.wallJumpForce = new Vector2(this.horizontalWallJumpForce * this.wallJumpDirection.x, this.verticalWallJumpForce * this.wallJumpDirection.y);
+            var wallJumpDirection = new Vector2(this.wallNormal.x, 1).normalized;
+            this.wallJumpForce = new Vector2(this.horizontalWallJumpForce * wallJumpDirection.x, this.verticalWallJumpForce * wallJumpDirection.y);
 
             // Debug ray cast
             Debug.DrawRay(this.transform.position, this.wallJumpForce, Color.black, 0.1f);
@@ -195,6 +211,9 @@ public class PlayerMovements : MonoBehaviour
         // Update horizontal movement and states with animations
         this.UpdateWalk();
         this.UpdateSprint();
+
+        // Update wall sliding state with animations
+        this.UpdateWallSlide();
 
         // Update jump states with animations
         this.UpdateGroundJump();

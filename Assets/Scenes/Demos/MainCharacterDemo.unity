@@ -893,39 +893,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a96b33ae9802134aac10b001a6a2e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovements
-  playerAnimations: {fileID: 0}
-  playerRigidbody: {fileID: 0}
-  playerCollider: {fileID: 0}
-  walkAction:
-    m_Name: Walk
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6bec4707-7db7-49a7-81b4-88ae127f56c2
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  jumpAction:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b9725c1d-8702-4e59-b575-f088fc7980ff
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  sprintAction:
-    m_Name: Sprint
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a603efcf-fc3a-4d8e-b14b-3672a8a80c0b
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
   walkSpeed: 3
   sprintSpeedMultiplier: 2
-  jumpForce: 15
+  jumpForce: 7
+  horizontalWallJumpForce: 5
+  verticalWallJumpForce: 7
   defaultGravityScale: 1
   fallGravityScale: 3
   groundLayers:
@@ -942,11 +914,20 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   isGrounded: 0
   isWalking: 0
-  isJumping: 0
+  isGroundJumping: 0
   isFalling: 0
   isSprinting: 0
   isTouchingWall: 0
   wallNormal: {x: 0, y: 0}
+  wallJumpForce: {x: 5, y: 7}
+  isWallSliding: 0
+  wallSlidingSpeed: 1
+  isWallJumping: 0
+  wallJumpingDirection: 0
+  wallJumpingTime: 0.2
+  wallJumpingCounter: 0
+  wallJumpingDuration: 0.4
+  wallJumpingPower: {x: 8, y: 16}
 --- !u!114 &721962287
 MonoBehaviour:
   m_ObjectHideFlags: 0
