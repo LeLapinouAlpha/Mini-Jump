@@ -872,7 +872,7 @@ Transform:
   m_GameObject: {fileID: 721962281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.03, y: -1.15, z: 0}
+  m_LocalPosition: {x: 41.5, y: -1.15, z: 0}
   m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -900,6 +900,8 @@ MonoBehaviour:
   verticalWallJumpForce: 7
   defaultGravityScale: 1
   fallGravityScale: 3
+  isWallSliding: 0
+  wallSlidingSpeed: 1
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -913,18 +915,14 @@ MonoBehaviour:
   wallCheckRadius: 0.1
   movement: {x: 0, y: 0}
   isGrounded: 0
-  isWalking: 0
   isGroundJumping: 0
   isFalling: 0
   isSprinting: 0
   isTouchingWall: 0
+  isWallJumping: 0
   wallNormal: {x: 0, y: 0}
   wallJumpForce: {x: 5, y: 7}
-  isWallSliding: 0
-  wallSlidingSpeed: 1
-  isWallJumping: 0
-  wallJumpingDirection: 0
-  wallJumpingTime: 0.2
+  wallJumpingDirection: {x: 0, y: 0}
   wallJumpingCounter: 0
   wallJumpingDuration: 0.4
   wallJumpingPower: {x: 8, y: 16}
