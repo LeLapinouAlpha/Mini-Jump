@@ -678,7 +678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   objectToFollow: {fileID: 721962284}
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   timeOffset: 0.2
   pixelSnappingEnabled: 0
   pixelsPerUnit: 64
