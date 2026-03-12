@@ -872,7 +872,7 @@ Transform:
   m_GameObject: {fileID: 721962281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.15, z: 0}
+  m_LocalPosition: {x: 34.03, y: -1.15, z: 0}
   m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -936,8 +936,8 @@ MonoBehaviour:
   wallLayers:
     serializedVersion: 2
     m_Bits: 128
-  wallCheckLeft: {fileID: 0}
-  wallCheckRight: {fileID: 0}
+  wallCheckLeft: {fileID: 1756557970}
+  wallCheckRight: {fileID: 508068569}
   wallCheckRadius: 0.1
   movement: {x: 0, y: 0}
   isGrounded: 0
@@ -946,6 +946,7 @@ MonoBehaviour:
   isFalling: 0
   isSprinting: 0
   isTouchingWall: 0
+  wallNormal: {x: 0, y: 0}
 --- !u!114 &721962287
 MonoBehaviour:
   m_ObjectHideFlags: 0
