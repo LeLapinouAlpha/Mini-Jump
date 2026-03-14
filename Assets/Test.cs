@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Test : MonoBehaviour
@@ -14,7 +13,7 @@ public class Test : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-     Console.WriteLine("Hello World!");   
+        
     }
 
     // Update is called once per frame
