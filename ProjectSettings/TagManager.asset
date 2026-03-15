@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
   - Walls
-  - 
+  - Backgrounds
   - 
   - 
   - 
@@ -38,11 +38,23 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default -1
-    uniqueID: 873084963
+  - name: Backgrounds SPRITE
+    uniqueID: 3676293413
+    locked: 0
+  - name: Backgrounds TILEMAPS
+    uniqueID: 1590033097
+    locked: 0
+  - name: Decor Background
+    uniqueID: 1772815099
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Decor Foreground
+    uniqueID: 3650916419
+    locked: 0
+  - name: Projectiles
+    uniqueID: 232067049
     locked: 0
   m_RenderingLayers:
   - Default
