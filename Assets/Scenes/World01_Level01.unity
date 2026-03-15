@@ -33578,8 +33578,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3820632883852572431, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2089251771}
   m_SourcePrefab: {fileID: 100100000, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+--- !u!1 &93727648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3820632883852572431, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+  m_PrefabInstance: {fileID: 93727647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &102444617
 GameObject:
   m_ObjectHideFlags: 0
@@ -38654,7 +38662,7 @@ Tilemap:
       - {fileID: 21300000, guid: eb4ea48c48f86394192bf6e1e4ff7550, type: 3}
       - {fileID: 21300000, guid: 75d386f1ae511134aaf6dc23991d28d4, type: 3}
       - {fileID: 21300000, guid: 7ebbb632e0fd575438e6e92bf06ad713, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -27, z: 0}
@@ -90671,7 +90679,7 @@ CompositeCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 447
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -93690,6 +93698,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2168938775681995269, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
   m_PrefabInstance: {fileID: 93727647}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2089251771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93727648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62966a902ceb65649af3c71094be1822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
 --- !u!1 &2135028775
 GameObject:
   m_ObjectHideFlags: 0

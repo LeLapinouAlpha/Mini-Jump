@@ -6,7 +6,7 @@ public class PlayerMovements : MonoBehaviour
     [Header("Components references")]
     private PlayerAnimations playerAnimations;
     private Rigidbody2D playerRigidbody;
-    private CapsuleCollider2D playerCollider;
+    //private CapsuleCollider2D playerCollider;
 
     [Header("Movements actions")]
     private InputAction walkAction;
@@ -57,7 +57,7 @@ public class PlayerMovements : MonoBehaviour
         // Get components attached to the player
         this.playerAnimations = this.GetComponent<PlayerAnimations>();
         this.playerRigidbody = this.GetComponent<Rigidbody2D>();
-        this.playerCollider = this.GetComponent<CapsuleCollider2D>();
+        //this.playerCollider = this.GetComponent<CapsuleCollider2D>();
 
         // Get ground and wall check transforms from child objects
         this.groundCheck = this.transform.Find("GroundCheck");
