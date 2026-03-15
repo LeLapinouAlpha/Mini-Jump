@@ -23,7 +23,7 @@ public class PlayerMovements : MonoBehaviour
     public float fallGravityScale = 3f;
     public bool isWallSliding;
     public float wallSlidingSpeed = 2f;
-    private float wallJumpingTime = 0.2f;
+    //private float wallJumpingTime = 0.2f;
 
     [Header("Ground check")]
     public LayerMask groundLayers;
