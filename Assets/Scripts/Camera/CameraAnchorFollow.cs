@@ -9,7 +9,7 @@ public class CameraAnchorFollow : MonoBehaviour
     public Transform target;
     public Collider2D collider;
     private float initialCameraSize;
-    public float cameraSize = 5;
+    public float cameraSize;
 
     void Start()
     {

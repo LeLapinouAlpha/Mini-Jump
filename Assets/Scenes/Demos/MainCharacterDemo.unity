@@ -680,6 +680,7 @@ MonoBehaviour:
   followHorizontal: 1
   followVertical: 1
   timeOffset: 0.2
+  verticalOffset: 0
   pixelSnappingEnabled: 0
   pixelsPerUnit: 64
   followTargetPos: {x: 0, y: 0, z: 0}
@@ -4490,6 +4491,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
+      propertyPath: cameraSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 615123611}
@@ -4569,6 +4574,10 @@ PrefabInstance:
     - target: {fileID: 4993220465776846574, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
+      propertyPath: cameraSize
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: cameraFollow
