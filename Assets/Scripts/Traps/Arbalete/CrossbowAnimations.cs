@@ -20,7 +20,6 @@ public class CrossbowAnimations : MonoBehaviour
     void Start()
     {
         this.animator = this.GetComponent<Animator>();
-        this.PlayShootingAnimation(true);
     }
     void Update()
     {
@@ -31,15 +30,16 @@ public class CrossbowAnimations : MonoBehaviour
     {
         if (this.animator != null)
         {
-            this.PlayShootingAnimation(counter >= reloadSpeed);
-            if (counter >= reloadSpeed)
+            if (this.counter >= this.reloadSpeed)
             {
-                counter = 0f;
+                this.PlayShootingAnimation(this.counter >= this.reloadSpeed);
+                this.counter = 0f;
             }
             else
             {
-                counter += Time.deltaTime;
+                this.counter += Time.deltaTime;
             }
-        }  
+        }
     }
 }
+

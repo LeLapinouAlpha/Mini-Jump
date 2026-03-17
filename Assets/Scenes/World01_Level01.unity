@@ -35051,6 +35051,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 80760941}
     m_Modifications:
+    - target: {fileID: 2647319223536226835, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
+      propertyPath: distance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647319223536226835, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
+      propertyPath: distanceForDespawn
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4839988020730007775, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
       propertyPath: m_Name
       value: Arbalete
@@ -35062,7 +35070,11 @@ PrefabInstance:
     - target: {fileID: 6900195750049623495, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
       propertyPath: arrow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 659769893}
+    - target: {fileID: 6900195750049623495, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
+      propertyPath: spawningObject
+      value: 
+      objectReference: {fileID: 4635998870310848741, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
     - target: {fileID: 8413727777322643803, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.67366
@@ -35104,12 +35116,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3166536702060240278, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8413727777322643803, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 624462017}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
 --- !u!4 &265040090 stripped
@@ -35801,7 +35809,7 @@ GameObject:
   - component: {fileID: 403226101}
   m_Layer: 9
   m_Name: Obstacle Passthrough Tilemap
-  m_TagString: Untagged
+  m_TagString: Damaging
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38130,79 +38138,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &624462016
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 265040090}
-    m_Modifications:
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203628964843936407, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-      propertyPath: m_Name
-      value: Arbalete_Fourchette
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
---- !u!4 &624462017 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2405959144481459339, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
-  m_PrefabInstance: {fileID: 624462016}
+--- !u!1 &659769893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7203628964843936407, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
+  m_PrefabInstance: {fileID: 265040089}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &680713383
 GameObject:
@@ -44901,6 +44840,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbalete
       objectReference: {fileID: 0}
+    - target: {fileID: 6900195750049623495, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
+      propertyPath: spawningObject
+      value: 
+      objectReference: {fileID: 4635998870310848741, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
     - target: {fileID: 8413727777322643803, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
       propertyPath: m_LocalPosition.x
       value: -100.28034
@@ -93917,6 +93860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbalete
       objectReference: {fileID: 0}
+    - target: {fileID: 6900195750049623495, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
+      propertyPath: spawningObject
+      value: 
+      objectReference: {fileID: 4635998870310848741, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
     - target: {fileID: 8413727777322643803, guid: 935d2258aa37054499d7b01cb70bde10, type: 3}
       propertyPath: m_LocalPosition.x
       value: -38.26

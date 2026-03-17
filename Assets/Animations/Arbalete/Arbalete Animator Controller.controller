@@ -67,6 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CrossbowRespawn
   gameObject: {fileID: 7203628964843936407, guid: a1808cc445a3a35409b074d8275cd4cd, type: 3}
   spawningPosition: {x: 49.67366, y: -0.2832909, z: 0}
+  counter: 0
 --- !u!1101 &-3844492314549154506
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -165,8 +166,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7202661087507780554}
-  m_StateMachineBehaviours:
-  - {fileID: -5597144636570186566}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

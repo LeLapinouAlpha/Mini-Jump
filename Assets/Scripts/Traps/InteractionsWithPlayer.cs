@@ -1,14 +1,14 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerInteract : MonoBehaviour
+public class InteractionsWithPlayer : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    PlayerHealth playerHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class PlayerInteract : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 9)
+        if(collision.gameObject.CompareTag("Damaging"))
             this.playerHealth.moneyHealth -= this.playerHealth.damage;
             Debug.Log(this.playerHealth.moneyHealth);
     }
