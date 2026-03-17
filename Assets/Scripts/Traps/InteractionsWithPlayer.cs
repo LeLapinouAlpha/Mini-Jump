@@ -4,6 +4,7 @@ using UnityEngine;
 public class InteractionsWithPlayer : MonoBehaviour
 {
     PlayerHealth playerHealth;
+    public float damage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,8 +19,8 @@ public class InteractionsWithPlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Damaging"))
-            this.playerHealth.moneyHealth -= this.playerHealth.damage;
+        if(collision.gameObject.CompareTag("Player"))
+            this.playerHealth.moneyHealth -= this.damage;
             Debug.Log(this.playerHealth.moneyHealth);
     }
 

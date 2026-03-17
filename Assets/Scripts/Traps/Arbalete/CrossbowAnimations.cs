@@ -32,7 +32,7 @@ public class CrossbowAnimations : MonoBehaviour
         {
             if (this.counter >= this.reloadSpeed)
             {
-                this.PlayShootingAnimation(this.counter >= this.reloadSpeed);
+                this.PlayShootingAnimation(true);
                 this.counter = 0f;
             }
             else
@@ -40,6 +40,10 @@ public class CrossbowAnimations : MonoBehaviour
                 this.counter += Time.deltaTime;
             }
         }
+    }
+    void resetAnimationShootingState()
+    {
+        this.PlayShootingAnimation(false);
     }
 }
 

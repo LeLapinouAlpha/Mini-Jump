@@ -8,12 +8,17 @@ public class CrossbowLogic : MonoBehaviour
     [Header("Arrow")]
     public GameObject spawningObject;
 
+    public int childIndex;
     Vector3 spawningObjectPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        if (spawningObject == null)
+        {
+            spawningObject = this.transform.GetChild(childIndex).gameObject;
+        }
+        this.spawningObjectPosition = this.spawningObject.transform.position;
     }
 
     // Update is called once per frame
@@ -24,8 +29,8 @@ public class CrossbowLogic : MonoBehaviour
    
     private void SpawnArrow()
     {
-        Instantiate(this.spawningObject, this.spawningObjectPosition, Quaternion.identity, this.transform);
-
+        GameObject newArrow = Instantiate(this.spawningObject, this.spawningObjectPosition, Quaternion.identity, this.transform);
+        newArrow.SetActive(true);
     }
 
 
