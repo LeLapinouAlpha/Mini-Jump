@@ -27,7 +27,8 @@ public class CrossbowLogic : MonoBehaviour
    
     private void SpawnArrow()
     {
-        Instantiate(this.spawningObject, this.spawningObjectPosition, Quaternion.identity, this.transform);
+        GameObject newGameObject  = Instantiate(this.spawningObject, this.spawningObjectPosition, Quaternion.identity, this.transform);
+        newGameObject.GetComponent<InteractionsWithPlayer>().damage = this.damage;
     }
 
 

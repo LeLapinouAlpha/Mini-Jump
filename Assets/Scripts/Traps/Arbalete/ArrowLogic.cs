@@ -12,7 +12,7 @@ public class ArrowLogic : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        //Setup all variables
         vitesse = this.GetComponentInParent<CrossbowLogic>().vitesse;
         distanceForDespawn = this.GetComponentInParent<CrossbowLogic>().distanceForDespawn;
         initialPositionY = this.transform.position.y;
