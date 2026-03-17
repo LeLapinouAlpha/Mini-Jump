@@ -4,12 +4,13 @@ using UnityEngine;
 public class InteractionsWithPlayer : MonoBehaviour
 {
     PlayerHealth playerHealth;
-    public float damage;
+    float damage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+        this.damage = this.GetComponentInParent<CrossbowLogic>().damage;
     }
 
     // Update is called once per frame

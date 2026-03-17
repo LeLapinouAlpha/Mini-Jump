@@ -7,10 +7,6 @@ public class CrossbowAnimations : MonoBehaviour
     [Header("Components references")]
     public Animator animator;
 
-    public void PlayReloadAnimation(bool value)
-    {
-        this.animator.SetBool("IsReloading", value);
-    }
     public void PlayShootingAnimation(bool value)
     {
         this.animator.SetBool("IsShooting", value);
