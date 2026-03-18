@@ -51,6 +51,7 @@ public class PlayerMovements : MonoBehaviour
     public float wallJumpingCounter;
     public float wallJumpingDuration = 0.4f;
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
+    public int facingDirection = 1; // 1 for right, -1 for left
 
     private void FindComponents()
     {
@@ -245,8 +246,13 @@ public class PlayerMovements : MonoBehaviour
         this.isWalking = Mathf.Abs(walkInput.x) > 1e-6f;
 
         this.playerAnimations.PlayWalkAnimation(this.isWalking);
-        this.playerAnimations.FlipSprite(walkInput.x < 0);
+        if (this.isWalking)
+        {
+            this.facingDirection = (walkInput.x > 0f) ? 1 : -1;
+            this.playerAnimations.FlipSprite(this.facingDirection < 0);
+        }
     }
+
     private void UpdateSprint()
     {
         // Check if player is sprinting and update states with animations
