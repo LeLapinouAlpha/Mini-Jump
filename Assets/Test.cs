@@ -15,6 +15,7 @@ public class Test : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Main character
     void Update()
     {
         
