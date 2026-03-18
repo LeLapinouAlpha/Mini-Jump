@@ -3,6 +3,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovements : MonoBehaviour
 {
+    public enum FacingDirection
+    {
+        Right = 1,
+        Left = -1
+    }
+
     [Header("Components references")]
     private PlayerAnimations playerAnimations;
     private Rigidbody2D playerRigidbody;
@@ -32,8 +38,7 @@ public class PlayerMovements : MonoBehaviour
 
     [Header("Wall check")]
     public LayerMask wallLayers;
-    public Transform wallCheckLeft;
-    public Transform wallCheckRight;
+    public Transform wallCheck;
     public float wallCheckRadius = 0.1f;
 
     [Header("States")]
@@ -51,7 +56,7 @@ public class PlayerMovements : MonoBehaviour
     public float wallJumpingCounter;
     public float wallJumpingDuration = 0.4f;
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
-    public int facingDirection = 1; // 1 for right, -1 for left
+    public FacingDirection facingDirection = FacingDirection.Right; // 1 for right, -1 for left
 
     private void FindComponents()
     {
@@ -62,8 +67,7 @@ public class PlayerMovements : MonoBehaviour
 
         // Get ground and wall check transforms from child objects
         this.groundCheck = this.transform.Find("GroundCheck");
-        this.wallCheckLeft = this.transform.Find("WallCheckLeft");
-        this.wallCheckRight = this.transform.Find("WallCheckRight");
+        this.wallCheck = this.transform.Find("WallCheck");
     }
 
     private void InitializeComponents()
@@ -94,72 +98,20 @@ public class PlayerMovements : MonoBehaviour
 
     private void WallCheck()
     {
-        // Raycast both sides and pick the most relevant hit (or none).
-        var leftWallHit = Physics2D.Raycast(this.wallCheckLeft.position, Vector2.left, this.wallCheckRadius, this.wallLayers);
-        var rightWallHit = Physics2D.Raycast(this.wallCheckRight.position, Vector2.right, this.wallCheckRadius, this.wallLayers);
+        // Find a collider at the wallCheck position
+        Collider2D hit = Physics2D.OverlapCircle(this.wallCheck.position, this.wallCheckRadius, this.wallLayers);
+        this.isTouchingWall = hit != null;
 
-        bool leftHit = leftWallHit.collider != null;
-        bool rightHit = rightWallHit.collider != null;
-
-        this.isTouchingWall = leftHit || rightHit;
-
-        // If not touching, clear wallNormal only when not in an active wall-jump.
-        if (!this.isTouchingWall)
+        if (this.isTouchingWall && hit != null)
         {
-            if (!this.isWallJumping)
-            {
-                this.wallNormal = Vector2.zero;
-            }
-            return;
+            // Compute a reliable wall normal: vector from the closest point on the collider to the player.
+            Vector2 closest = hit.ClosestPoint(this.transform.position);
+            this.wallNormal = ((Vector2)this.transform.position - closest).normalized;
         }
-
-        // If we're currently performing a wall jump, KEEP the cached wallNormal used when the jump started.
-        // This prevents the physics raycasts from flipping the normal while we repeatedly apply the jump velocity,
-        // which can cause the "stuck / oscillating" behaviour on one side.
-        if (this.isWallJumping)
+        else
         {
-            // We still update isTouchingWall above so other state logic (wall slide) is aware,
-            // but we do not overwrite wallNormal during the wall-jump window.
-            return;
+            this.wallNormal = Vector2.zero;
         }
-
-        // If only one side hits, use its normal. If both hit, use hit.point relative to player center
-        if (leftHit && !rightHit)
-        {
-            this.wallNormal = leftWallHit.normal;
-        }
-        else if (rightHit && !leftHit)
-        {
-            this.wallNormal = rightWallHit.normal;
-        }
-        else // both hit: pick the one whose hit.point is actually on the closest side of the player
-        {
-            float leftDiff = Mathf.Abs(leftWallHit.point.x - this.transform.position.x);
-            float rightDiff = Mathf.Abs(rightWallHit.point.x - this.transform.position.x);
-
-            this.wallNormal = (leftDiff <= rightDiff) ? leftWallHit.normal : rightWallHit.normal;
-        }
-    }
-
-    // Helper to get an immediate, up-to-date wall normal (used when jump is pressed in Update).
-    private Vector2 GetCurrentWallNormal()
-    {
-        var leftWallHit = Physics2D.Raycast(this.wallCheckLeft.position, Vector2.left, this.wallCheckRadius, this.wallLayers);
-        var rightWallHit = Physics2D.Raycast(this.wallCheckRight.position, Vector2.right, this.wallCheckRadius, this.wallLayers);
-
-        bool leftHit = leftWallHit.collider != null;
-        bool rightHit = rightWallHit.collider != null;
-
-        if (!leftHit && !rightHit) return Vector2.zero;
-
-        if (leftHit && !rightHit) return leftWallHit.normal;
-        if (rightHit && !leftHit) return rightWallHit.normal;
-
-        // both hit: choose based on hit point relative to player center to avoid oscillation when both checks overlap the same surface
-        float leftDiff = Mathf.Abs(leftWallHit.point.x - this.transform.position.x);
-        float rightDiff = Mathf.Abs(rightWallHit.point.x - this.transform.position.x);
-
-        return (leftDiff <= rightDiff) ? leftWallHit.normal : rightWallHit.normal;
     }
 
     private void GroundJump()
@@ -177,15 +129,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void WallJump()
     {
-        // Compute a direction away from the wall and apply configured forces directly.
-        this.wallJumpingDirection = new Vector2(this.wallNormal.x, 1f).normalized;
-
-        float horizontal = (this.wallNormal.x == 0f) ? this.horizontalWallJumpForce : Mathf.Sign(this.wallNormal.x) * this.horizontalWallJumpForce;
-        float vertical = this.verticalWallJumpForce;
-
-        this.wallJumpForce = new Vector2(horizontal, vertical);
-
-        // Apply using linearVelocity so input doesn't fight the impulse.
+        // Apply the previously computed wallJumpForce (so it's consistent even if wallNormal changes)
         this.playerRigidbody.linearVelocity = this.wallJumpForce;
 
         // Apply fall gravity so arc matches ground jumps
@@ -193,7 +137,7 @@ public class PlayerMovements : MonoBehaviour
 
         // Draw the applied jump vector for debug clarity (and draw wall normal)
         Debug.DrawRay(this.transform.position, (Vector3)this.wallJumpForce, Color.black, 0.2f);
-        Debug.DrawRay(this.transform.position, (Vector3)(this.wallNormal * 1.0f), Color.yellow, 0.2f);
+        Debug.DrawRay(this.transform.position, (Vector3)this.wallNormal * 0.5f, Color.yellow, 0.2f);
     }
 
     private void MovePlayer()
@@ -246,11 +190,16 @@ public class PlayerMovements : MonoBehaviour
         this.isWalking = Mathf.Abs(walkInput.x) > 1e-6f;
 
         this.playerAnimations.PlayWalkAnimation(this.isWalking);
-        if (this.isWalking)
-        {
-            this.facingDirection = (walkInput.x > 0f) ? 1 : -1;
-            this.playerAnimations.FlipSprite(this.facingDirection < 0);
-        }
+
+        this.facingDirection = this.movement.x > 0 ? FacingDirection.Right : (this.movement.x < 0 ? FacingDirection.Left : this.facingDirection);
+        this.UpdateFacingDirection();
+    }
+
+    private void UpdateFacingDirection()
+    {
+        var localSale = this.transform.localScale;
+        localSale.x = Mathf.Abs(localSale.x) * (int)this.facingDirection;
+        this.transform.localScale = localSale;
     }
 
     private void UpdateSprint()
@@ -280,17 +229,24 @@ public class PlayerMovements : MonoBehaviour
     {
         if (this.isWallSliding && this.jumpAction.WasPressedThisFrame())
         {
-            // Get an immediate, up-to-date wall normal at the moment of the jump press and cache it.
-            // Caching + preventing WallCheck from overwriting while isWallJumping prevents the flip/oscillation.
-            this.wallNormal = this.GetCurrentWallNormal();
+            // Determine horizontal direction now and store the jump force so FixedUpdate uses the intended direction
+            float horizontalDir = (this.wallNormal.x != 0f) ? Mathf.Sign(this.wallNormal.x) : -((int)this.facingDirection);
+            this.wallJumpForce = new Vector2(this.horizontalWallJumpForce * horizontalDir, this.verticalWallJumpForce);
 
-            // Optional debug: log values to inspect why a jump might point into the wall
-            Debug.Log($"WallJump start - wallNormal: {this.wallNormal} playerX: {this.transform.position.x}");
-
-            // start wall jump: set flag and timer so input is ignored briefly
             this.isWallJumping = true;
             this.wallJumpingCounter = this.wallJumpingDuration;
-            // wallJumpForce will be computed and drawn inside WallJump (using the freshly acquired wallNormal)
+
+            // Immediately set facing direction to face away from the wall so the sprite orientation matches the jump.
+            if (this.wallNormal.x < 0f) // wall is on the right -> face left
+            {
+                this.facingDirection = FacingDirection.Left;
+            }
+            else if (this.wallNormal.x > 0f) // wall is on the left -> face right
+            {
+                this.facingDirection = FacingDirection.Right;
+            }
+
+            this.UpdateFacingDirection();
         }
     }
 
@@ -357,12 +313,17 @@ public class PlayerMovements : MonoBehaviour
     private void OnDrawGizmos()
     {
         // Draw ground check gizmos as a red wire sphere
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.groundCheck.position, this.groundCheckRadius);
+        if (this.groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(this.groundCheck.position, this.groundCheckRadius);
+        }
 
         // Draw wall check gizmos as lines
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(this.wallCheckLeft.position, this.wallCheckLeft.position + Vector3.left * this.wallCheckRadius);
-        Gizmos.DrawLine(this.wallCheckRight.position, this.wallCheckRight.position + Vector3.right * this.wallCheckRadius);
+        if (this.wallCheck != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(this.wallCheck.position, this.wallCheckRadius);
+        }
     }
 }
