@@ -223,6 +223,7 @@ public class PlayerMovements : MonoBehaviour
     private void UpdateWallSlide()
     {
         this.isWallSliding = this.isTouchingWall && !this.isGrounded && this.isWalking;
+        this.playerAnimations.PlaySlidingAnimation(this.isWallSliding);
     }
 
     private void UpdateWallJump()

@@ -26,10 +26,9 @@ public class PlayerAnimations : MonoBehaviour
         this.animator.SetBool("IsSprinting", value);
     }
 
-    public void FlipSprite(bool flipX, bool flipY = false)
+    public void PlaySlidingAnimation(bool value)
     {
-        this.spriteRenderer.flipX = flipX;
-        this.spriteRenderer.flipY = flipY;
+        this.animator.SetBool("IsSliding", value);
     }
 
     void Start()
