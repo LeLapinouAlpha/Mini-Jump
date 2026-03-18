@@ -33639,9 +33639,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3820632883852572431, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2089251778}
-    - targetCorrespondingSourceObject: {fileID: 3820632883852572431, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2089251771}
   m_SourcePrefab: {fileID: 100100000, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
 --- !u!1 &93727648 stripped
 GameObject:
@@ -38983,7 +38980,7 @@ Tilemap:
       - {fileID: 21300000, guid: eb4ea48c48f86394192bf6e1e4ff7550, type: 3}
       - {fileID: 21300000, guid: 75d386f1ae511134aaf6dc23991d28d4, type: 3}
       - {fileID: 21300000, guid: 7ebbb632e0fd575438e6e92bf06ad713, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -21, z: 0}
@@ -39139,7 +39136,7 @@ Tilemap:
       - {fileID: 21300000, guid: eb4ea48c48f86394192bf6e1e4ff7550, type: 3}
       - {fileID: 21300000, guid: 75d386f1ae511134aaf6dc23991d28d4, type: 3}
       - {fileID: 21300000, guid: 7ebbb632e0fd575438e6e92bf06ad713, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -17, z: 0}
@@ -39490,7 +39487,7 @@ Tilemap:
       - {fileID: 21300000, guid: 75e72cb68090eb744a7ce47277d72a80, type: 3}
       - {fileID: 21300000, guid: 3f530aac7b3e2044fad50fe65dc9cfc5, type: 3}
       - {fileID: 21300000, guid: ac3903d6021da0a498f51305d07287e4, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -93797,19 +93794,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2168938775681995269, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
   m_PrefabInstance: {fileID: 93727647}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2089251771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93727648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62966a902ceb65649af3c71094be1822, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
-  damage: 0
 --- !u!114 &2089251778
 MonoBehaviour:
   m_ObjectHideFlags: 0
