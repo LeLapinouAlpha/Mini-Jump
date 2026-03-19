@@ -6,6 +6,15 @@ public class PlayerAnimations : MonoBehaviour
     public Animator animator;
     public SpriteRenderer spriteRenderer;
 
+    public void ResetAnimations()
+    {
+        this.animator.SetBool("IsWalking", false);
+        this.animator.SetBool("IsJumping", false);
+        this.animator.SetBool("IsFalling", false);
+        this.animator.SetBool("IsSprinting", false);
+        this.animator.SetBool("IsWallSliding", false);
+    }
+
     public void PlayWalkAnimation(bool value)
     {
         this.animator.SetBool("IsWalking", value);
@@ -26,9 +35,9 @@ public class PlayerAnimations : MonoBehaviour
         this.animator.SetBool("IsSprinting", value);
     }
 
-    public void PlaySlidingAnimation(bool value)
+    public void PlayWallSlideAnimation(bool value)
     {
-        this.animator.SetBool("IsSliding", value);
+        this.animator.SetBool("IsWallSliding", value);
     }
 
     void Start()
