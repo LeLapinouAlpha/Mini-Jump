@@ -20,6 +20,7 @@ public class PlayerMovements : MonoBehaviour
     private InputAction sprintAction;
 
     [Header("Controls settings")]
+    public bool canMove = true;
     public float walkSpeed = 3f;
     public float sprintSpeedMultiplier = 2f;
     public float jumpForce = 7f;
@@ -114,6 +115,12 @@ public class PlayerMovements : MonoBehaviour
         }
     }
 
+    private void StopMovements()
+    {
+        this.movement = Vector2.zero;
+        this.playerRigidbody.linearVelocity = Vector2.zero;
+    }
+
     private void GroundJump()
     {
         this.playerRigidbody.AddForce(new Vector2(0, this.jumpForce), ForceMode2D.Impulse);
@@ -173,7 +180,7 @@ public class PlayerMovements : MonoBehaviour
         // If we are wall-jumping timer active, continue ignoring horizontal input
         if (this.wallJumpingCounter > 0f)
         {
-            // do nothing — keep previous movement.x (or set to 0)
+            // do nothing ï¿½ keep previous movement.x (or set to 0)
             return;
         }
 
@@ -273,6 +280,12 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!this.canMove)
+        {
+            this.StopMovements();
+            return;
+        }
+
         // Check if player is grounded
         this.GroundCheck();
 
@@ -296,6 +309,12 @@ public class PlayerMovements : MonoBehaviour
 
     void Update()
     {
+        if (!this.canMove)
+        {
+            this.playerAnimations.ResetAnimations();
+            return;
+        }
+
         // Update horizontal movement and states with animations
         this.UpdateWalk();
         this.UpdateSprint();
