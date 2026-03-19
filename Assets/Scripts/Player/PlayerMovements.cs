@@ -9,62 +9,68 @@ public class PlayerMovements : MonoBehaviour
         Left = -1
     }
 
-    [Header("Components references")]
+    [Header("Components References")]
     private PlayerAnimations playerAnimations;
     private Rigidbody2D playerRigidbody;
-    private CapsuleCollider2D playerCollider;
 
-    [Header("Movements actions")]
+    [Header("Movements Actions")]
     private InputAction walkAction;
     private InputAction jumpAction;
     private InputAction sprintAction;
 
-    [Header("Controls settings")]
+    [Header("General Settings")]
     public bool canMove = true;
-    public float walkSpeed = 3f;
-    public float sprintSpeedMultiplier = 2f;
-    public float jumpForce = 7f;
-    public float horizontalWallJumpForce = 5f;
-    public float verticalWallJumpForce = 7f;
+
+    [Header("Ground Jump Settings")]
+    public float groundJumpForce = 7f;
     public float defaultGravityScale = 1f;
     public float fallGravityScale = 3f;
-    public bool isWallSliding;
-    public float wallSlidingSpeed = 2f;
-    private float wallJumpingTime = 0.2f;
 
-    [Header("Ground check")]
+    [Header("Walk/Sprint Settings")]
+    public float walkSpeed = 3f;
+    public float sprintSpeedMultiplier = 2f;
+
+    [Header("Wall Slide/Jump Settings")]
+    public float wallJumpingDuration = 0.4f;
+    public float wallJumpForceX = 5f;
+    public float wallJumpForceY = 7f;
+    public float wallSlidingSpeed = 2f;
+
+    [Header("Ground Check")]
     public LayerMask groundLayers;
     public Transform groundCheck;
     public float groundCheckRadius = 0.1f;
 
-    [Header("Wall check")]
+    [Header("Wall Check")]
     public LayerMask wallLayers;
     public Transform wallCheck;
     public float wallCheckRadius = 0.1f;
 
     [Header("States")]
-    public Vector2 movement;
-    public bool isGrounded;
+    private Vector2 movement;
+    private bool isGrounded;
     private bool isWalking;
-    public bool isGroundJumping;
-    public bool isFalling;
-    public bool isSprinting;
-    public bool isTouchingWall;
-    public bool isWallJumping;
-    public Vector2 wallNormal;
-    public Vector2 wallJumpForce;
-    public Vector2 wallJumpingDirection;
-    public float wallJumpingCounter;
-    public float wallJumpingDuration = 0.4f;
-    public Vector2 wallJumpingPower = new Vector2(8f, 16f);
-    public FacingDirection facingDirection = FacingDirection.Right; // 1 for right, -1 for left
+    private bool isSprinting;
+    private bool isGroundJumping;
+    private bool isTouchingWall;
+    private bool isWallSliding;
+    private bool isWallJumping;
+    private bool isFalling;
+    private Vector2 wallNormal;
+    private Vector2 wallJumpForce;
+    private float wallJumpingCounter;
+    private FacingDirection facingDirection = FacingDirection.Right; // 1 for right, -1 for left
 
+    /*
+     * =====================================================================
+     *                            INITIALIZATION
+     * =====================================================================
+     */
     private void FindComponents()
     {
         // Get components attached to the player
         this.playerAnimations = this.GetComponent<PlayerAnimations>();
         this.playerRigidbody = this.GetComponent<Rigidbody2D>();
-        this.playerCollider = this.GetComponent<CapsuleCollider2D>();
 
         // Get ground and wall check transforms from child objects
         this.groundCheck = this.transform.Find("GroundCheck");
@@ -83,6 +89,20 @@ public class PlayerMovements : MonoBehaviour
         this.jumpAction = InputSystem.actions.FindAction("Jump");
         this.sprintAction = InputSystem.actions.FindAction("Sprint");
     }
+
+    void Start()
+    {
+        this.FindComponents();
+        this.InitializeComponents();
+        this.FindInputActions();
+    }
+
+
+    /*
+     * =====================================================================
+     *                                PHYSICS
+     * =====================================================================
+     */
 
     private void GroundCheck()
     {
@@ -123,7 +143,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void GroundJump()
     {
-        this.playerRigidbody.AddForce(new Vector2(0, this.jumpForce), ForceMode2D.Impulse);
+        this.playerRigidbody.AddForce(new Vector2(0, this.groundJumpForce), ForceMode2D.Impulse);
         this.playerRigidbody.gravityScale = this.fallGravityScale;
         this.isGroundJumping = false;
     }
@@ -136,13 +156,13 @@ public class PlayerMovements : MonoBehaviour
 
     private void WallJump()
     {
-        // Apply the previously computed wallJumpForce (so it's consistent even if wallNormal changes)
+        // Apply the previously computed wallJumpForce
         this.playerRigidbody.linearVelocity = this.wallJumpForce;
 
         // Apply fall gravity so arc matches ground jumps
         this.playerRigidbody.gravityScale = this.fallGravityScale;
 
-        // Draw the applied jump vector for debug clarity (and draw wall normal)
+        // Draw the applied jump vector for debug purposes
         Debug.DrawRay(this.transform.position, (Vector3)this.wallJumpForce, Color.black, 0.2f);
         Debug.DrawRay(this.transform.position, (Vector3)this.wallNormal * 0.5f, Color.yellow, 0.2f);
     }
@@ -172,27 +192,59 @@ public class PlayerMovements : MonoBehaviour
             this.playerRigidbody.linearVelocity = new Vector2(this.movement.x, v.y);
         }
     }
+    private void FixedUpdate()
+    {
+        if (!this.canMove)
+        {
+            this.StopMovements();
+            return;
+        }
+
+        // Check if player is grounded
+        this.GroundCheck();
+
+        // Check if player is touching wall
+        this.WallCheck();
+
+        // Move player based on states
+        this.MovePlayer();
+
+        // Decrease wall jump timer and clear state when finished
+        if (this.wallJumpingCounter > 0f)
+        {
+            this.wallJumpingCounter -= Time.fixedDeltaTime;
+            if (this.wallJumpingCounter <= 0f)
+            {
+                this.wallJumpingCounter = 0f;
+                this.isWallJumping = false;
+            }
+        }
+    }
+
+
+    /*
+     * =====================================================================
+     *                         STATES & RENDERING
+     * =====================================================================
+     */
+
+    private bool IsInputTowardWall(Vector2 walkInput)
+    {
+        // walkInput.x * wallNormal.x < 0 -> input points into the wall
+        return this.isTouchingWall && !this.isGrounded && this.isWalking && (walkInput.x * this.wallNormal.x < 0f);
+    }
 
     private void UpdateWalk()
     {
         var walkInput = this.walkAction.ReadValue<Vector2>();
 
-        // If we are wall-jumping timer active, continue ignoring horizontal input
+        // Ignore horizontal input while wall jumping
         if (this.wallJumpingCounter > 0f)
         {
-            // do nothing � keep previous movement.x (or set to 0)
             return;
         }
 
-        // If touching a wall and input is directed into the wall, ignore that horizontal input
-        bool inputTowardsWall = false;
-        if (this.isTouchingWall && !this.isGrounded && Mathf.Abs(walkInput.x) > 1e-6f)
-        {
-            // walkInput.x * wallNormal.x < 0 -> input points into the wall
-            inputTowardsWall = (this.wallNormal.x != 0f) && (walkInput.x * this.wallNormal.x < 0f);
-        }
-
-        this.movement.x = inputTowardsWall ? 0f : this.walkSpeed * walkInput.x;
+        this.movement.x = this.IsInputTowardWall(walkInput) ? 0f : this.walkSpeed * walkInput.x;
 
         this.isWalking = Mathf.Abs(walkInput.x) > 1e-6f;
 
@@ -230,7 +282,7 @@ public class PlayerMovements : MonoBehaviour
     private void UpdateWallSlide()
     {
         this.isWallSliding = this.isTouchingWall && !this.isGrounded && this.isWalking;
-        this.playerAnimations.PlaySlidingAnimation(this.isWallSliding);
+        this.playerAnimations.PlayWallSlideAnimation(this.isWallSliding);
     }
 
     private void UpdateWallJump()
@@ -239,12 +291,13 @@ public class PlayerMovements : MonoBehaviour
         {
             // Determine horizontal direction now and store the jump force so FixedUpdate uses the intended direction
             float horizontalDir = (this.wallNormal.x != 0f) ? Mathf.Sign(this.wallNormal.x) : -((int)this.facingDirection);
-            this.wallJumpForce = new Vector2(this.horizontalWallJumpForce * horizontalDir, this.verticalWallJumpForce);
+            this.wallJumpForce.x = this.wallJumpForceX * horizontalDir;
+            this.wallJumpForce.y = this.wallJumpForceY;
 
             this.isWallJumping = true;
             this.wallJumpingCounter = this.wallJumpingDuration;
 
-            // Immediately set facing direction to face away from the wall so the sprite orientation matches the jump.
+            // Update facing direction to match the jump direction
             if (this.wallNormal.x < 0f) // wall is on the right -> face left
             {
                 this.facingDirection = FacingDirection.Left;
@@ -253,7 +306,6 @@ public class PlayerMovements : MonoBehaviour
             {
                 this.facingDirection = FacingDirection.Right;
             }
-
             this.UpdateFacingDirection();
         }
     }
@@ -264,47 +316,6 @@ public class PlayerMovements : MonoBehaviour
         this.isFalling = this.playerRigidbody.linearVelocity.y < 0 && !this.isGrounded;
 
         this.playerAnimations.PlayFallingAnimation(this.isFalling);
-    }
-
-    void Start()
-    {
-        // Find components in the player object and its children
-        this.FindComponents();
-
-        // Initialize components
-        this.InitializeComponents();
-
-        // Find input actions
-        this.FindInputActions();
-    }
-
-    private void FixedUpdate()
-    {
-        if (!this.canMove)
-        {
-            this.StopMovements();
-            return;
-        }
-
-        // Check if player is grounded
-        this.GroundCheck();
-
-        // Check if player is touching wall
-        this.WallCheck();
-
-        // Move player based on states
-        this.MovePlayer();
-
-        // decrease wall jump timer and clear state when finished
-        if (this.wallJumpingCounter > 0f)
-        {
-            this.wallJumpingCounter -= Time.fixedDeltaTime;
-            if (this.wallJumpingCounter <= 0f)
-            {
-                this.wallJumpingCounter = 0f;
-                this.isWallJumping = false;
-            }
-        }
     }
 
     void Update()
@@ -329,6 +340,13 @@ public class PlayerMovements : MonoBehaviour
         // Update falling state with animations
         this.UpdateFall();
     }
+
+
+    /*
+     * =====================================================================
+     *                               EVENTS
+     * =====================================================================
+     */
 
     private void OnDrawGizmos()
     {
