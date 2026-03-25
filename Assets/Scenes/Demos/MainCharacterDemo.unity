@@ -550,7 +550,8 @@ GameObject:
   - component: {fileID: 614750097}
   - component: {fileID: 614750096}
   - component: {fileID: 614750098}
-  - component: {fileID: 614750095}
+  - component: {fileID: 614750100}
+  - component: {fileID: 614750099}
   m_Layer: 0
   m_Name: Louche
   m_TagString: Untagged
@@ -558,33 +559,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &614750095
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614750094}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 6200000, guid: ec102f54e8fc6dd498e5f930fbeb51cf, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!212 &614750096
 SpriteRenderer:
   serializedVersion: 2
@@ -653,7 +627,7 @@ Transform:
   m_GameObject: {fileID: 614750094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.848, y: -1.5, z: 0}
+  m_LocalPosition: {x: 26.36, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -681,6 +655,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &614750099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614750094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cdf4f662568b9d458024215f1167fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoucheLogic
+  travellingDistance: 5
+  vitesse: 4
+--- !u!114 &614750100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614750094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c582ab6bec470454ca5a9887fb28f90a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoucheAnimations
+  animator: {fileID: 0}
 --- !u!1 &615123607
 GameObject:
   m_ObjectHideFlags: 0
