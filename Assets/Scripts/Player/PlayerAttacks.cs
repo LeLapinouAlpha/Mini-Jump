@@ -26,16 +26,24 @@ public class PlayerAttacks : MonoBehaviour
         this.playerAnimations = this.GetComponent<PlayerAnimations>();
         this.playerMovements = this.GetComponent<PlayerMovements>();
 
-        // FIXME: Create custom input action asset for player attacks
         this.punchAction = InputSystem.actions.FindAction("Punch");
     }
 
     private void UpdatePunch()
     {
-        this.isPunching = this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunching") || this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("RightPunching");
+        this.isPunching = this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunching")
+            || this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("RightPunching")
+            || this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("Uppercuting");
 
         if (this.punchAction.WasPressedThisFrame() && !this.isPunching)
         {
+            if (this.comboCounter == 4)
+            {
+                this.playerAnimations.animator.Play("Uppercuting");
+                this.ResetCombo();
+                return;
+            }
+
             if (this.comboCounter % 2 == 0)
             {
                 this.playerAnimations.animator.Play("LeftPunching");
@@ -44,14 +52,12 @@ public class PlayerAttacks : MonoBehaviour
             {
                 this.playerAnimations.animator.Play("RightPunching");
             }
-
             this.IncrementComboCounter();
         }
     }
 
     private void IncrementComboCounter()
     {
-
         this.comboCounter++;
         this.comboTimer = 0f;
     }
