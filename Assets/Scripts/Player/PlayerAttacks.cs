@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerAnimations))]
+[RequireComponent(typeof(PlayerAnimations)), RequireComponent(typeof(PlayerMovements))]
 public class PlayerAttacks : MonoBehaviour
 {
     [Header("Components references")]
     public PlayerAnimations playerAnimations;
+    public PlayerMovements playerMovements;
 
     [Header("Attack actions")]
     public InputAction punchAction;
@@ -18,6 +19,7 @@ public class PlayerAttacks : MonoBehaviour
     void Start()
     {
         this.playerAnimations = this.GetComponent<PlayerAnimations>();
+        this.playerMovements = this.GetComponent<PlayerMovements>();
 
         // FIXME: Create custom input action asset for player attacks
         this.punchAction = InputSystem.actions.FindAction("Punch");
@@ -46,5 +48,6 @@ public class PlayerAttacks : MonoBehaviour
         this.UpdatePunch();
 
         this.isAttacking = this.isPunching;
+        this.playerMovements.canMove = !this.isAttacking;
     }
 }
