@@ -10,6 +10,7 @@ public class PlayerAttacks : MonoBehaviour
 
     [Header("Attack Actions")]
     public InputAction punchAction;
+    public InputAction kickAction;
 
     [Header("Combo Settings")]
     [Tooltip("Time in seconds to reset the combo counter")]
@@ -18,6 +19,7 @@ public class PlayerAttacks : MonoBehaviour
     [Header("States")]
     private bool isAttacking;
     private bool isPunching;
+    private bool isKicking;
     private int comboCounter;
     private float comboTimer = 0f;
 
@@ -27,6 +29,7 @@ public class PlayerAttacks : MonoBehaviour
         this.playerMovements = this.GetComponent<PlayerMovements>();
 
         this.punchAction = InputSystem.actions.FindAction("Punch");
+        this.kickAction = InputSystem.actions.FindAction("Kick");
     }
 
     private void UpdatePunch()
@@ -55,6 +58,16 @@ public class PlayerAttacks : MonoBehaviour
             this.IncrementComboCounter();
         }
     }
+    private void UpdateKick()
+    {
+        this.isKicking = this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("Kicking");
+
+        if (this.kickAction.WasPressedThisFrame() && !this.isKicking)
+        {
+            this.playerAnimations.animator.Play("Kicking");
+            this.ResetCombo();
+        }
+    }
 
     private void IncrementComboCounter()
     {
@@ -80,11 +93,13 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         this.UpdatePunch();
+        this.UpdateKick();
 
-        this.isAttacking = this.isPunching;
+        this.isAttacking = this.isPunching || this.isKicking;
         this.playerMovements.canMove = !this.isAttacking;
 
         this.UpdateCombo();
