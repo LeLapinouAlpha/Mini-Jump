@@ -10,11 +10,6 @@ public class LoucheAnimations : MonoBehaviour
         this.animator.SetBool("IsWalking", value);
     }
 
-    public void PlayAttackAnimation(bool value)
-    {
-        this.animator.SetBool("IsAttacking", value);
-    }
-
     void Start()
     {
         this.animator = this.GetComponent<Animator>();
