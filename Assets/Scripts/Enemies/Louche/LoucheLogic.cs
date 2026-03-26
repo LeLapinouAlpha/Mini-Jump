@@ -4,6 +4,7 @@ using System;
 public class LoucheLogic : MonoBehaviour
 {
     LoucheAnimations animationsScript;
+    public PlayerHealth playerHealth;
 
     float currentPositionX;
     float initialPositionX;
@@ -12,12 +13,14 @@ public class LoucheLogic : MonoBehaviour
 
     public float travellingDistance;
     public float vitesse;
+    public float damage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         initialPositionX = this.transform.position.x;
         currentPositionX = this.transform.position.x;
+
         animationsScript = this.GetComponent<LoucheAnimations>();
 
         canMove = true;
@@ -63,13 +66,13 @@ public class LoucheLogic : MonoBehaviour
 
     void FaceDirection()
     {
-        if(moveRight && this.transform.localScale.x != -1)
-        {
-            this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
-        }
-        else if (!moveRight && this.transform.localScale.x != 1)
+        if(moveRight && this.transform.localScale.x != 1)
         {
             this.transform.localScale = new Vector3(1, this.transform.localScale.y, this.transform.localScale.z);
+        }
+        else if (!moveRight && this.transform.localScale.x != -1)
+        {
+            this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -87,5 +90,14 @@ public class LoucheLogic : MonoBehaviour
             }
             this.animationsScript.animator.Play("Attack");
         }
+    }
+    public void SpawnBlob()
+    {
+
+    }
+
+    public void Attack()
+    {
+        this.playerHealth.moneyHealth -= this.damage;
     }
 }

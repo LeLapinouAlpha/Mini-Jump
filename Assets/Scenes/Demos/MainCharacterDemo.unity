@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 614750098}
   - component: {fileID: 614750100}
   - component: {fileID: 614750099}
+  - component: {fileID: 614750104}
   - component: {fileID: 614750102}
   - component: {fileID: 614750103}
   m_Layer: 0
@@ -612,7 +613,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 07ecafccdc5846440bccff6cffa6f5b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -669,6 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdf4f662568b9d458024215f1167fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoucheLogic
+  playerHealth: {fileID: 1489335396}
   travellingDistance: 10
   vitesse: 2
 --- !u!114 &614750100
@@ -776,6 +778,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 11, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &614750104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614750094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c1092e5ddcfa94a8e2ce652425111f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackPlayer
 --- !u!1 &615123607
 GameObject:
   m_ObjectHideFlags: 0
@@ -4342,6 +4356,24 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &1489335389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5078661870690564114, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+  m_PrefabInstance: {fileID: 434862711488534327}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1489335396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489335389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec03f13632bdb749913aa2d5d2fadef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  moneyHealth: 100
 --- !u!1001 &434862711488534327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4417,7 +4449,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5078661870690564114, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 1489335396}
   m_SourcePrefab: {fileID: 100100000, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
