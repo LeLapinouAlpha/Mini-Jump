@@ -34,37 +34,37 @@ public class PlayerAttacks : MonoBehaviour
 
     private void UpdatePunch()
     {
-        this.isPunching = this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunching")
-            || this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("RightPunching")
-            || this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("Uppercuting");
+        this.isPunching = this.playerAnimations.IsPlayingAnimation("LeftPunching")
+            || this.playerAnimations.IsPlayingAnimation("RightPunching")
+            || this.playerAnimations.IsPlayingAnimation("Uppercuting");
 
         if (this.punchAction.WasPressedThisFrame() && !this.isPunching)
         {
             if (this.comboCounter == 4)
             {
-                this.playerAnimations.animator.Play("Uppercuting");
+                this.playerAnimations.PlayUppercutAnimation();
                 this.ResetCombo();
                 return;
             }
 
             if (this.comboCounter % 2 == 0)
             {
-                this.playerAnimations.animator.Play("LeftPunching");
+                this.playerAnimations.PlayLeftPunchAnimation();
             }
             else
             {
-                this.playerAnimations.animator.Play("RightPunching");
+                this.playerAnimations.PlayRightPunchAnimation();
             }
             this.IncrementComboCounter();
         }
     }
     private void UpdateKick()
     {
-        this.isKicking = this.playerAnimations.animator.GetCurrentAnimatorStateInfo(0).IsName("Kicking");
+        this.isKicking = this.playerAnimations.IsPlayingAnimation("Kicking");
 
         if (this.kickAction.WasPressedThisFrame() && !this.isKicking)
         {
-            this.playerAnimations.animator.Play("Kicking");
+            this.playerAnimations.PlayKickAnimation();
             this.ResetCombo();
         }
     }
