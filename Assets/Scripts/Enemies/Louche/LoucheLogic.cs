@@ -6,6 +6,7 @@ public class LoucheLogic : MonoBehaviour
 {
     public PlayerHealth playerHealth;
     LoucheAnimations animationsScript;
+    SpriteRenderer spriteRenderer;
     Collider2D collider2d;
     Vector2 initialCollider2dOffset;
 
@@ -32,6 +33,7 @@ public class LoucheLogic : MonoBehaviour
         currentPositionX = this.transform.position.x;
 
         animationsScript = this.GetComponent<LoucheAnimations>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
         collider2d = this.GetComponent<Collider2D>();
         initialCollider2dOffset = collider2d.offset;
 
@@ -80,14 +82,14 @@ public class LoucheLogic : MonoBehaviour
 
     void FaceDirection()
     {
-        if (moveRight && this.transform.localScale.x != 1)
+        if (moveRight && !this.spriteRenderer.flipX)
         {
-            this.transform.localScale = new Vector3(1, this.transform.localScale.y, this.transform.localScale.z);
+            this.spriteRenderer.flipX = true;
             this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x, this.initialCollider2dOffset.y);
         }
-        else if (!moveRight && this.transform.localScale.x != -1)
+        else if (!moveRight && this.spriteRenderer.flipX)
         {
-            this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
+            this.spriteRenderer.flipX = false;
             this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x * (-1), this.initialCollider2dOffset.y);
         }
     }
@@ -101,11 +103,11 @@ public class LoucheLogic : MonoBehaviour
                 attackSpeedCounter = 0;
                 if (collision.transform.position.x > this.transform.position.x)
                 {
-                    this.transform.localScale = new Vector3(1, this.transform.localScale.y, this.transform.localScale.z);
+                    this.spriteRenderer.flipX = true;
                 }
                 else
                 {
-                    this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
+                    this.spriteRenderer.flipX = false;
                 }
                 this.animationsScript.animator.Play("Attack");
             }
@@ -121,6 +123,11 @@ public class LoucheLogic : MonoBehaviour
         GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, Quaternion.identity, this.transform);
         newGameObject.GetComponent<AttackPlayer>().damage = this.damage;
         newGameObject.GetComponent<BlobLogic>().isRight = this.moveRight;
+        newGameObject.GetComponent<SpriteRenderer>().flipX = this.moveRight;
+        if (!this.moveRight)
+        {
+            newGameObject.GetComponent<Collider2D>().offset = new Vector2(newGameObject.GetComponent<Collider2D>().offset.x * (-1), newGameObject.GetComponent<Collider2D>().offset.y);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
