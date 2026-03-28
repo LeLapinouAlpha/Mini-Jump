@@ -552,7 +552,6 @@ GameObject:
   - component: {fileID: 614750098}
   - component: {fileID: 614750100}
   - component: {fileID: 614750099}
-  - component: {fileID: 614750104}
   - component: {fileID: 614750102}
   - component: {fileID: 614750103}
   m_Layer: 0
@@ -630,7 +629,7 @@ Transform:
   m_GameObject: {fileID: 614750094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.36, y: -1.5, z: 0}
+  m_LocalPosition: {x: 43.27, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -671,8 +670,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoucheLogic
   playerHealth: {fileID: 1489335396}
-  travellingDistance: 10
+  travellingDistance: 2
   vitesse: 2
+  spawningObject: {fileID: 6548808327149081522, guid: c5dc276df51c37649a9834830ba8fa35, type: 3}
+  damage: 50
+  vitesseBlob: 2.5
+  distanceForDespawn: 100
 --- !u!114 &614750100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,7 +769,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 3, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -776,20 +779,8 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 11, y: 2}
+  m_Size: {x: 6, y: 2}
   m_EdgeRadius: 0
---- !u!114 &614750104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614750094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c1092e5ddcfa94a8e2ce652425111f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackPlayer
 --- !u!1 &615123607
 GameObject:
   m_ObjectHideFlags: 0
