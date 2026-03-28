@@ -672,6 +672,7 @@ MonoBehaviour:
   playerHealth: {fileID: 1489335396}
   travellingDistance: 2
   vitesse: 2
+  attackSpeed: 3
   spawningObject: {fileID: 6548808327149081522, guid: c5dc276df51c37649a9834830ba8fa35, type: 3}
   damage: 50
   vitesseBlob: 2.5
@@ -4428,6 +4429,10 @@ PrefabInstance:
     - target: {fileID: 2984635924213196760, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031243241513355351, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+      propertyPath: m_SleepingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5078661870690564114, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_Name

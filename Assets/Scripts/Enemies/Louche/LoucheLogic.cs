@@ -7,7 +7,7 @@ public class LoucheLogic : MonoBehaviour
     public PlayerHealth playerHealth;
     LoucheAnimations animationsScript;
     Collider2D collider2d;
-    Vector2 collider2dOffset;
+    Vector2 initialCollider2dOffset;
 
     float currentPositionX;
     float initialPositionX;
@@ -16,6 +16,8 @@ public class LoucheLogic : MonoBehaviour
 
     public float travellingDistance;
     public float vitesse;
+    public float attackSpeed;
+    float attackSpeedCounter;
 
     [Header("Blob The blob")]
     public GameObject spawningObject;
@@ -31,9 +33,10 @@ public class LoucheLogic : MonoBehaviour
 
         animationsScript = this.GetComponent<LoucheAnimations>();
         collider2d = this.GetComponent<Collider2D>();
-        collider2dOffset = collider2d.offset;
+        initialCollider2dOffset = collider2d.offset;
 
         canMove = true;
+        attackSpeedCounter = attackSpeed;
         animationsScript.PlayWalkAnimation(true);
     }
     // Update is called once per frame
@@ -41,6 +44,7 @@ public class LoucheLogic : MonoBehaviour
     {
         Move(canMove);
         FaceDirection();
+        
     }
 
     void Move(bool canMove)
@@ -79,12 +83,12 @@ public class LoucheLogic : MonoBehaviour
         if (moveRight && this.transform.localScale.x != 1)
         {
             this.transform.localScale = new Vector3(1, this.transform.localScale.y, this.transform.localScale.z);
-            this.collider2d.offset = new Vector2(this.collider2dOffset.x, this.collider2dOffset.y);
+            this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x, this.initialCollider2dOffset.y);
         }
         else if (!moveRight && this.transform.localScale.x != -1)
         {
             this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
-            this.collider2d.offset = new Vector2(this.collider2dOffset.x * (-1), this.collider2dOffset.y);
+            this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x * (-1), this.initialCollider2dOffset.y);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -92,15 +96,23 @@ public class LoucheLogic : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             canMove = false;
-            if (collision.transform.position.x > this.transform.position.x)
+            if (attackSpeedCounter >= attackSpeed)
             {
-                this.transform.localScale = new Vector3(1, this.transform.localScale.y, this.transform.localScale.z);
+                attackSpeedCounter = 0;
+                if (collision.transform.position.x > this.transform.position.x)
+                {
+                    this.transform.localScale = new Vector3(1, this.transform.localScale.y, this.transform.localScale.z);
+                }
+                else
+                {
+                    this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
+                }
+                this.animationsScript.animator.Play("Attack");
             }
             else
             {
-                this.transform.localScale = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
+                attackSpeedCounter += Time.deltaTime;
             }
-            this.animationsScript.animator.Play("Attack");
         }
 
     }
