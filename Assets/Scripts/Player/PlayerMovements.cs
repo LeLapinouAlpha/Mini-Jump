@@ -191,7 +191,7 @@ public class PlayerMovements : MonoBehaviour
     private void StopMovements()
     {
         this.movement = Vector2.zero;
-        this.playerRigidbody.linearVelocity = Vector2.zero;
+        this.playerRigidbody.linearVelocityX = 0f;
     }
 
     /// <summary>
