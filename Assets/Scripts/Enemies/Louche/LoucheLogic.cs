@@ -60,7 +60,7 @@ public class LoucheLogic : MonoBehaviour
                 this.currentPositionX += this.vitesse * Time.deltaTime;
                 this.transform.position = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
             }
-            if (!moveRight)
+            else
             {
                 this.currentPositionX -= this.vitesse * Time.deltaTime;
                 this.transform.position = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
@@ -101,14 +101,7 @@ public class LoucheLogic : MonoBehaviour
             if (attackSpeedCounter >= attackSpeed)
             {
                 attackSpeedCounter = 0;
-                if (collision.transform.position.x > this.transform.position.x)
-                {
-                    this.spriteRenderer.flipX = true;
-                }
-                else
-                {
-                    this.spriteRenderer.flipX = false;
-                }
+                this.spriteRenderer.flipX = collision.transform.position.x > this.transform.position.x;
                 this.animationsScript.animator.Play("Attack");
             }
             else

@@ -28,12 +28,13 @@ public class BlobLogic : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+
         if (isRight)
         {
             this.currentPositionX += this.vitesse * Time.deltaTime;
             this.transform.position = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
         }
-        if (!isRight)
+        else
         {
             this.currentPositionX -= this.vitesse * Time.deltaTime;
             this.transform.position = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
