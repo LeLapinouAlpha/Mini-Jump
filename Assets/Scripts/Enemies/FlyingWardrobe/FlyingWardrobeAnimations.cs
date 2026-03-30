@@ -7,8 +7,10 @@ public class FlyingWardrobeAnimations : MonoBehaviour
     public Animator animator;
 
     [Header("Vertical Movement Settings")]
-    public float verticalAmplitude = 0.1f; // How high the wardrobe moves up and down
-    public float verticalFrequency = 5f; // How fast the wardrobe moves up and down
+    [Tooltip("How high the wardrobe moves up and down")]
+    public float verticalAmplitude = 0.1f;
+    [Tooltip("How fast the wardrobe moves up and down")]
+    public float verticalFrequency = 5f;
 
 
     public bool IsInState(string stateName)
