@@ -23,6 +23,8 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float vitesse;
     public FacingDirection facingDirection;
     private FacingDirection initialFacingDirection;
+    private bool moveAbovePlayer;
+    private float playerPosX;
 
     void Start()
     {
@@ -38,6 +40,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
         this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
         this.initialFacingDirection = facingDirection;
+        this.moveAbovePlayer = false;
     }
 
     void Update()
@@ -76,22 +79,24 @@ public class FlyingWardrobeLogic : MonoBehaviour
     {
         if (this.initialFacingDirection == FacingDirection.Right)
         {
+            float targetX = !this.moveAbovePlayer ? initialPositionX + travellingDistance : initialPositionX + Mathf.Abs(playerPosX - initialPositionX);
             if (currentPositionX < initialPositionX)
             {
                 this.facingDirection = FacingDirection.Right;
             }
-            else if (currentPositionX > initialPositionX + travellingDistance)
+            else if (currentPositionX > targetX)
             {
                 this.facingDirection = FacingDirection.Left;
             }
         }
         else
         {
+            float targetX = !this.moveAbovePlayer ? initialPositionX - travellingDistance : initialPositionX - Mathf.Abs(playerPosX - initialPositionX);
             if (currentPositionX > initialPositionX)
             {
                 this.facingDirection = FacingDirection.Left;
             }
-            else if (currentPositionX < initialPositionX - travellingDistance)
+            else if (currentPositionX < targetX)
             {
                 this.facingDirection = FacingDirection.Right;
             }
@@ -100,15 +105,20 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     void FaceDirection()
     {
-        if (this.facingDirection == FacingDirection.Right && !this.spriteRenderer.flipX)
+        Vector3 currentScale = transform.localScale;
+
+        // Assuming right means a negative X scale (since flipX = true was used for Right)
+        if (this.facingDirection == FacingDirection.Right && currentScale.x > 0)
         {
-            this.spriteRenderer.flipX = true;
-            this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x, this.initialCollider2dOffset.y);
+            currentScale.x = -Mathf.Abs(currentScale.x);
+            transform.localScale = currentScale;
+            // The collider offset is now automatically flipped by the localScale
         }
-        else if (this.facingDirection == FacingDirection.Left && this.spriteRenderer.flipX)
+        else if (this.facingDirection == FacingDirection.Left && currentScale.x < 0)
         {
-            this.spriteRenderer.flipX = false;
-            this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x * (-1), this.initialCollider2dOffset.y);
+            currentScale.x = Mathf.Abs(currentScale.x);
+            transform.localScale = currentScale;
+            // The collider offset is now automatically flipped by the localScale
         }
     }
 
@@ -116,6 +126,10 @@ public class FlyingWardrobeLogic : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            // Move above the player
+            this.moveAbovePlayer = true;
+            this.playerPosX = collision.transform.position.x;
+
             //canMove = false;
             //if (attackSpeedCounter >= attackSpeed)
             //{
@@ -127,6 +141,10 @@ public class FlyingWardrobeLogic : MonoBehaviour
             //{
             //    attackSpeedCounter += Time.deltaTime;
             //}
+        }
+        else
+        {
+            this.moveAbovePlayer = false;
         }
 
     }
