@@ -11,9 +11,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     [Header("Components References")]
     public FlyingWardrobeAnimations animations;
-    SpriteRenderer spriteRenderer;
     Collider2D collider2d;
-    Vector2 initialCollider2dOffset;
 
     float currentPositionX;
     float initialPositionX;
@@ -32,9 +30,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
         currentPositionX = this.transform.position.x;
 
         //animationsScript = this.GetComponent<LoucheAnimations>();
-        spriteRenderer = this.GetComponent<SpriteRenderer>();
         collider2d = this.GetComponent<Collider2D>();
-        initialCollider2dOffset = collider2d.offset;
 
         canMove = true;
 
@@ -56,7 +52,11 @@ public class FlyingWardrobeLogic : MonoBehaviour
             //animationsScript.PlayWalkAnimation(true);
             RightOrLeft();
 
-            if (this.facingDirection == FacingDirection.Right)
+            if (this.moveAbovePlayer)
+            {
+                this.currentPositionX = Mathf.MoveTowards(this.currentPositionX, this.playerPosX, this.vitesse * Time.deltaTime);
+            }
+            else if (this.facingDirection == FacingDirection.Right)
             {
                 this.currentPositionX += this.vitesse * Time.deltaTime;
             }
@@ -65,7 +65,9 @@ public class FlyingWardrobeLogic : MonoBehaviour
                 this.currentPositionX -= this.vitesse * Time.deltaTime;
             }
 
+            // Always update position, this ensures vertical animations continue playing
             Vector3 movement = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
+
             if (this.animations.IsInState("Flying"))
             {
                 movement += this.animations.GetVerticalOffset();
@@ -77,28 +79,43 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     void RightOrLeft()
     {
-        if (this.initialFacingDirection == FacingDirection.Right)
+        if (this.moveAbovePlayer)
         {
-            float targetX = !this.moveAbovePlayer ? initialPositionX + travellingDistance : initialPositionX + Mathf.Abs(playerPosX - initialPositionX);
-            if (currentPositionX < initialPositionX)
+            // Update facing direction based on the player position relative to enemy
+            if (currentPositionX < playerPosX - 0.05f)
             {
                 this.facingDirection = FacingDirection.Right;
             }
-            else if (currentPositionX > targetX)
+            else if (currentPositionX > playerPosX + 0.05f)
             {
                 this.facingDirection = FacingDirection.Left;
             }
         }
         else
         {
-            float targetX = !this.moveAbovePlayer ? initialPositionX - travellingDistance : initialPositionX - Mathf.Abs(playerPosX - initialPositionX);
-            if (currentPositionX > initialPositionX)
+            if (this.initialFacingDirection == FacingDirection.Right)
             {
-                this.facingDirection = FacingDirection.Left;
+                float targetX = initialPositionX + travellingDistance;
+                if (currentPositionX < initialPositionX)
+                {
+                    this.facingDirection = FacingDirection.Right;
+                }
+                else if (currentPositionX > targetX)
+                {
+                    this.facingDirection = FacingDirection.Left;
+                }
             }
-            else if (currentPositionX < targetX)
+            else
             {
-                this.facingDirection = FacingDirection.Right;
+                float targetX = initialPositionX - travellingDistance;
+                if (currentPositionX > initialPositionX)
+                {
+                    this.facingDirection = FacingDirection.Left;
+                }
+                else if (currentPositionX < targetX)
+                {
+                    this.facingDirection = FacingDirection.Right;
+                }
             }
         }
     }
@@ -154,6 +171,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             canMove = true;
+            this.moveAbovePlayer = false;
         }
     }
 }
