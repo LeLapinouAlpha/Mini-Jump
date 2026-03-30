@@ -11,7 +11,6 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     [Header("Components References")]
     public FlyingWardrobeAnimations animations;
-
     SpriteRenderer spriteRenderer;
     Collider2D collider2d;
     Vector2 initialCollider2dOffset;
@@ -23,6 +22,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float travellingDistance;
     public float vitesse;
     public FacingDirection facingDirection;
+    private FacingDirection initialFacingDirection;
 
     void Start()
     {
@@ -37,6 +37,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
         canMove = true;
 
         this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
+        this.initialFacingDirection = facingDirection;
     }
 
     void Update()
@@ -59,7 +60,6 @@ public class FlyingWardrobeLogic : MonoBehaviour
             else
             {
                 this.currentPositionX -= this.vitesse * Time.deltaTime;
-                
             }
 
             Vector3 movement = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
@@ -74,13 +74,27 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     void RightOrLeft()
     {
-        if (currentPositionX < initialPositionX)
+        if (this.initialFacingDirection == FacingDirection.Right)
         {
-            this.facingDirection = FacingDirection.Right;
+            if (currentPositionX < initialPositionX)
+            {
+                this.facingDirection = FacingDirection.Right;
+            }
+            else if (currentPositionX > initialPositionX + travellingDistance)
+            {
+                this.facingDirection = FacingDirection.Left;
+            }
         }
-        else if (currentPositionX > initialPositionX + travellingDistance)
+        else
         {
-            this.facingDirection = FacingDirection.Left;
+            if (currentPositionX > initialPositionX)
+            {
+                this.facingDirection = FacingDirection.Left;
+            }
+            else if (currentPositionX < initialPositionX - travellingDistance)
+            {
+                this.facingDirection = FacingDirection.Right;
+            }
         }
     }
 
@@ -102,7 +116,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            canMove = false;
+            //canMove = false;
             //if (attackSpeedCounter >= attackSpeed)
             //{
             //    attackSpeedCounter = 0;
