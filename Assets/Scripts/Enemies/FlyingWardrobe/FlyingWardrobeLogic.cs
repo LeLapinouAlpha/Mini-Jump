@@ -3,6 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(FlyingWardrobeAnimations))]
 public class FlyingWardrobeLogic : MonoBehaviour
 {
+    public enum FacingDirection
+    {
+        Left,
+        Right
+    }
+
     [Header("Components References")]
     public FlyingWardrobeAnimations animations;
 
@@ -12,11 +18,11 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     float currentPositionX;
     float initialPositionX;
-    bool moveRight = true;
     bool canMove;
 
     public float travellingDistance;
     public float vitesse;
+    public FacingDirection facingDirection;
 
     void Start()
     {
@@ -46,7 +52,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
             //animationsScript.PlayWalkAnimation(true);
             RightOrLeft();
 
-            if (moveRight)
+            if (this.facingDirection == FacingDirection.Right)
             {
                 this.currentPositionX += this.vitesse * Time.deltaTime;
             }
@@ -68,24 +74,24 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     void RightOrLeft()
     {
-        if (currentPositionX <= initialPositionX)
+        if (currentPositionX < initialPositionX)
         {
-            moveRight = true;
+            this.facingDirection = FacingDirection.Right;
         }
-        if (currentPositionX >= initialPositionX + travellingDistance)
+        else if (currentPositionX > initialPositionX + travellingDistance)
         {
-            moveRight = false;
+            this.facingDirection = FacingDirection.Left;
         }
     }
 
     void FaceDirection()
     {
-        if (moveRight && !this.spriteRenderer.flipX)
+        if (this.facingDirection == FacingDirection.Right && !this.spriteRenderer.flipX)
         {
             this.spriteRenderer.flipX = true;
             this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x, this.initialCollider2dOffset.y);
         }
-        else if (!moveRight && this.spriteRenderer.flipX)
+        else if (this.facingDirection == FacingDirection.Left && this.spriteRenderer.flipX)
         {
             this.spriteRenderer.flipX = false;
             this.collider2d.offset = new Vector2(this.initialCollider2dOffset.x * (-1), this.initialCollider2dOffset.y);
