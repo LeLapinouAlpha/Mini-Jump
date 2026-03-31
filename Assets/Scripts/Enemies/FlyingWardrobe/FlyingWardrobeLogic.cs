@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(FlyingWardrobeAnimations))]
@@ -33,6 +34,8 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float damage;
     public float vitessePlate;
     public float distanceForDespawn;
+    public int plateCount = 3;
+    public float plateXOffsetRange = 0.5f;
 
     void Start()
     {
@@ -162,7 +165,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
             {
                 if (this.attackSpeedCounter >= this.attackSpeed)
                 {
-                    this.SpawnPlate();
+                    this.SpawnPlates();
 
                     this.attackSpeedCounter = 0f;
                 }
@@ -190,9 +193,14 @@ public class FlyingWardrobeLogic : MonoBehaviour
         }
     }
 
-    public void SpawnPlate()
+    public void SpawnPlates()
     {
-        GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, Quaternion.identity, this.transform.parent);
-        newGameObject.GetComponent<PlateLogic>().InitializeParameters(this.damage, this.vitessePlate, this.distanceForDespawn);
+        for (int i = 0; i < this.plateCount; i++)
+        {
+            float xOffset = Mathf.Abs(this.plateXOffsetRange);
+            var position = this.transform.position + new Vector3(UnityEngine.Random.Range(-xOffset, xOffset), 0f, 0f);
+            GameObject newGameObject = Instantiate(this.spawningObject, position, Quaternion.identity, this.transform.parent);
+            newGameObject.GetComponent<PlateLogic>().InitializeParameters(this.damage, this.vitessePlate, this.distanceForDespawn);
+        }
     }
 }
