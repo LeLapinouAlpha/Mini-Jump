@@ -12,90 +12,89 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     [Header("Components References")]
     public FlyingWardrobeAnimations animations;
-    Collider2D collider2d;
 
-    float currentPositionX;
-    float initialPositionX;
-    bool canMove;
-
+    [Header("Movements Parameters")]
     public float travellingDistance;
-    public float vitesse;
-    public FacingDirection facingDirection;
-    private FacingDirection initialFacingDirection;
+    public float velocity;
+    public FacingDirection initialFacingDirection;
     private bool moveAbovePlayer;
-    private float playerPosX;
 
+    [Header("Attack Parameters")]
     public float attackSpeed;
-    float attackSpeedCounter;
-
-    [Header("Plate The Plate")]
-    public GameObject spawningObject;
-    public float damage;
-    public float vitessePlate;
-    public float distanceForDespawn;
     public int plateCount = 3;
     public Vector2 plateOffsetRange;
-    public float playerPosXThreshold = 0.5f;
+    public float spawnTriggerDistThresh = 0.5f;
+
+    [Header("Plate The Plate")]
+    public GameObject platePrefab;
+    public float plateDamage;
+    public float plateVelocity;
+    public float plateDespawnDistance;
+
+    [Header("States")]
+    private float currentPositionX;
+    private float initialPositionX;
+    private bool canMove;
+    private FacingDirection facingDirection;
+    private float playerPosX;
+    private float attackSpeedCounter;
 
     void Start()
     {
-        initialPositionX = this.transform.position.x;
-        currentPositionX = this.transform.position.x;
+        this.initialPositionX = this.transform.position.x;
+        this.currentPositionX = this.transform.position.x;
 
-        //animationsScript = this.GetComponent<LoucheAnimations>();
-        collider2d = this.GetComponent<Collider2D>();
-
-        canMove = true;
+        this.canMove = true;
 
         this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
-        this.initialFacingDirection = facingDirection;
+        this.facingDirection = initialFacingDirection;
         this.moveAbovePlayer = false;
         this.attackSpeedCounter = this.attackSpeed;
     }
 
     void Update()
     {
-        Move(canMove);
+        Move();
         FaceDirection();
     }
 
-    void Move(bool canMove)
+    private void Move()
     {
-        if (canMove)
+        if (!this.canMove)
         {
-            RightOrLeft();
-
-            if (this.moveAbovePlayer)
-            {
-                this.currentPositionX = Mathf.MoveTowards(this.currentPositionX, this.playerPosX, this.vitesse * Time.deltaTime);
-            }
-            else if (this.facingDirection == FacingDirection.Right)
-            {
-                this.currentPositionX += this.vitesse * Time.deltaTime;
-            }
-            else
-            {
-                this.currentPositionX -= this.vitesse * Time.deltaTime;
-            }
-
-            // Always update position, this ensures vertical animations continue playing
-            Vector3 movement = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
-
-            if (this.animations.IsInState("Flying"))
-            {
-                movement += this.animations.GetVerticalOffset();
-            }
-
-            this.transform.position = movement;
+            return;
         }
+
+        RightOrLeft();
+
+        if (this.moveAbovePlayer)
+        {
+            this.currentPositionX = Mathf.MoveTowards(this.currentPositionX, this.playerPosX, this.velocity * Time.deltaTime);
+        }
+        else if (this.facingDirection == FacingDirection.Right)
+        {
+            this.currentPositionX += this.velocity * Time.deltaTime;
+        }
+        else
+        {
+            this.currentPositionX -= this.velocity * Time.deltaTime;
+        }
+
+        var movement = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
+        if (this.animations.IsInState("Flying"))
+        {
+            movement += this.animations.GetVerticalOffset();
+        }
+
+        this.transform.position = movement;
     }
 
-    void RightOrLeft()
+    private void RightOrLeft()
     {
         if (this.moveAbovePlayer)
         {
             // Update facing direction based on the player position relative to enemy
-            if (currentPositionX < playerPosX - 0.05f)
+            if (this.currentPositionX < this.playerPosX - 0.05f)
             {
                 this.facingDirection = FacingDirection.Right;
             }
@@ -108,8 +107,8 @@ public class FlyingWardrobeLogic : MonoBehaviour
         {
             if (this.initialFacingDirection == FacingDirection.Right)
             {
-                float targetX = initialPositionX + travellingDistance;
-                if (currentPositionX < initialPositionX)
+                float targetX = this.initialPositionX + this.travellingDistance;
+                if (this.currentPositionX < this.initialPositionX)
                 {
                     this.facingDirection = FacingDirection.Right;
                 }
@@ -120,12 +119,12 @@ public class FlyingWardrobeLogic : MonoBehaviour
             }
             else
             {
-                float targetX = initialPositionX - travellingDistance;
-                if (currentPositionX > initialPositionX)
+                float targetX = this.initialPositionX - this.travellingDistance;
+                if (this.currentPositionX > this.initialPositionX)
                 {
                     this.facingDirection = FacingDirection.Left;
                 }
-                else if (currentPositionX < targetX)
+                else if (this.currentPositionX < targetX)
                 {
                     this.facingDirection = FacingDirection.Right;
                 }
@@ -133,22 +132,18 @@ public class FlyingWardrobeLogic : MonoBehaviour
         }
     }
 
-    void FaceDirection()
+    private void FaceDirection()
     {
-        Vector3 currentScale = transform.localScale;
-
-        // Assuming right means a negative X scale (since flipX = true was used for Right)
+        Vector3 currentScale = this.transform.localScale;
         if (this.facingDirection == FacingDirection.Right && currentScale.x > 0)
         {
             currentScale.x = -Mathf.Abs(currentScale.x);
-            transform.localScale = currentScale;
-            // The collider offset is now automatically flipped by the localScale
+            this.transform.localScale = currentScale;
         }
         else if (this.facingDirection == FacingDirection.Left && currentScale.x < 0)
         {
             currentScale.x = Mathf.Abs(currentScale.x);
-            transform.localScale = currentScale;
-            // The collider offset is now automatically flipped by the localScale
+            this.transform.localScale = currentScale;
         }
     }
 
@@ -156,7 +151,6 @@ public class FlyingWardrobeLogic : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Move above the player
             this.moveAbovePlayer = true;
             this.playerPosX = collision.transform.position.x;
 
@@ -182,26 +176,31 @@ public class FlyingWardrobeLogic : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            canMove = true;
+            this.canMove = true;
             this.moveAbovePlayer = false;
         }
     }
 
-    public void SpawnPlates()
+    private Vector3 GeneratePlatePosition()
+    {
+        float xOffset = Mathf.Abs(this.plateOffsetRange.x);
+        float yOffset = Mathf.Abs(this.plateOffsetRange.y);
+        var range = new Vector3(UnityEngine.Random.Range(-xOffset, xOffset), UnityEngine.Random.Range(-yOffset, yOffset), 0f);
+        return this.transform.position + range;
+    }
+
+    private void SpawnPlates()
     {
         for (int i = 0; i < this.plateCount; i++)
         {
-            float xOffset = Mathf.Abs(this.plateOffsetRange.x);
-            float yOffset = Mathf.Abs(this.plateOffsetRange.y);
-            var range = new Vector3(UnityEngine.Random.Range(-xOffset, xOffset), UnityEngine.Random.Range(-yOffset, yOffset), 0f);
-            var position = this.transform.position + range;
-            GameObject newGameObject = Instantiate(this.spawningObject, position, Quaternion.identity, this.transform.parent);
-            newGameObject.GetComponent<PlateLogic>().InitializeParameters(this.damage, this.vitessePlate, this.distanceForDespawn);
+            var position = this.GeneratePlatePosition();
+            GameObject plate = Instantiate(this.platePrefab, position, Quaternion.identity, this.transform.parent);
+            plate.GetComponent<PlateLogic>().InitializeParameters(this.plateDamage, this.plateVelocity, this.plateDespawnDistance);
         }
     }
 
-    public bool IsNearPlayer()
+    private bool IsNearPlayer()
     {
-        return Mathf.Abs(this.currentPositionX - this.playerPosX) <= Mathf.Abs(this.playerPosXThreshold);
+        return Mathf.Abs(this.currentPositionX - this.playerPosX) <= Mathf.Abs(this.spawnTriggerDistThresh);
     }
 }

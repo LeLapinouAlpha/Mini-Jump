@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlateLogic : MonoBehaviour
 {
     [Header("Parameters")]
-    private float vitesse;
-    private float distanceForDespawn;
+    private float velocity;
+    private float despawnDistance;
 
     [Header("States")]
     private float initialPositionY;
@@ -13,13 +13,13 @@ public class PlateLogic : MonoBehaviour
 
     public bool HasCoveredDistanceForDespawn()
     {
-        return this.currentPositionY >= this.initialPositionY + this.distanceForDespawn;
+        return this.currentPositionY >= this.initialPositionY + this.despawnDistance;
     }
 
-    public void InitializeParameters(float damage, float vitesse, float distanceForDespawn)
+    public void InitializeParameters(float damage, float vitesse, float despawnDistance)
     {
-        this.vitesse = vitesse;
-        this.distanceForDespawn = distanceForDespawn;
+        this.velocity = vitesse;
+        this.despawnDistance = despawnDistance;
 
         this.GetComponent<AttackPlayer>().damage = damage;
     }
@@ -37,7 +37,7 @@ public class PlateLogic : MonoBehaviour
             this.gameObject.SetActive(false);
         }
 
-        this.currentPositionY -= this.vitesse * Time.deltaTime;
+        this.currentPositionY -= this.velocity * Time.deltaTime;
         this.transform.position = new Vector3(this.transform.position.x, this.currentPositionY, this.transform.position.z);
     }
 
