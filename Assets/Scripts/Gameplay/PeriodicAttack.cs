@@ -1,15 +1,20 @@
 using Assets.Scripts.Gameplay;
-using System;
+using Assets.Scripts.Utils;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PeriodicAttack : MonoBehaviour
 {
-    [Header("Attack Parameters")]
+    [Header("Timer Parameters")]
     public float attackSpeed = 1f;
+
+    [Header("Actions Parameters")]
     public UnityEvent actions = null;
+
+    [Header("Conditions Parameters")]
     public MonoBehaviour[] conditions;
+    public ConditionCheckType conditionCheckType = ConditionCheckType.All;
 
     [Header("States")]
     private float attackCounter = 0f;
@@ -23,7 +28,14 @@ public class PeriodicAttack : MonoBehaviour
 
     void Update()
     {
-        if (this.attackCounter >= this.attackSpeed && this.attackConditions.All(c => c.CanAttack()))
+        bool conditionsMet = this.conditionCheckType switch
+        {
+            ConditionCheckType.All => this.attackConditions.All(c => c.CanAttack()),
+            ConditionCheckType.Any => this.attackConditions.Any(c => c.CanAttack()),
+            _ => throw new System.NotImplementedException(),
+        };
+
+        if (this.attackCounter >= this.attackSpeed && conditionsMet)
         {
             this.actions?.Invoke();
             this.attackCounter = 0f;
