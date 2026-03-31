@@ -34,7 +34,7 @@ public class PlateLogic : MonoBehaviour
     {
         if (this.HasCoveredDistanceForDespawn())
         {
-            this.gameObject.SetActive(false);
+            Object.Destroy(this.gameObject);
         }
 
         this.currentPositionY -= this.velocity * Time.deltaTime;
@@ -43,6 +43,6 @@ public class PlateLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.gameObject.SetActive(false);
+        Object.Destroy(this.gameObject);
     }
 }
