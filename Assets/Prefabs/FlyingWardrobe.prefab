@@ -226,6 +226,14 @@ MonoBehaviour:
   travellingDistance: 5
   vitesse: 1
   facingDirection: 0
+  attackSpeed: 0
+  spawningObject: {fileID: 0}
+  damage: 0
+  vitessePlate: 0
+  distanceForDespawn: 0
+  plateCount: 3
+  plateXOffsetRange: 0.5
+  playerPosXThreshold: 2
 --- !u!114 &1224357503771172133
 MonoBehaviour:
   m_ObjectHideFlags: 0

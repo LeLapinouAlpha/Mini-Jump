@@ -36,6 +36,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float distanceForDespawn;
     public int plateCount = 3;
     public float plateXOffsetRange = 0.5f;
+    public float playerPosXThreshold = 0.5f;
 
     void Start()
     {
@@ -161,12 +162,9 @@ public class FlyingWardrobeLogic : MonoBehaviour
             this.moveAbovePlayer = true;
             this.playerPosX = collision.transform.position.x;
 
-            if (this.attackSpeedCounter >= this.attackSpeed)
+            if (this.attackSpeedCounter >= this.attackSpeed && this.IsNearPlayer())
             {
-                if (this.isAbovePlayer)
-                { 
-                    this.SpawnPlates(); 
-                }
+                this.SpawnPlates();
 
                 this.attackSpeedCounter = 0f;
             }
@@ -200,5 +198,10 @@ public class FlyingWardrobeLogic : MonoBehaviour
             GameObject newGameObject = Instantiate(this.spawningObject, position, Quaternion.identity, this.transform.parent);
             newGameObject.GetComponent<PlateLogic>().InitializeParameters(this.damage, this.vitessePlate, this.distanceForDespawn);
         }
+    }
+
+    public bool IsNearPlayer()
+    {
+        return Mathf.Abs(this.currentPositionX - this.playerPosX) <= Mathf.Abs(this.playerPosXThreshold);
     }
 }

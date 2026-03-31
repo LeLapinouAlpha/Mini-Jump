@@ -4415,6 +4415,10 @@ PrefabInstance:
       propertyPath: distanceForDespawn
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: playerPosXThreshold
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8010567163055821035, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_Size.x
       value: 2
