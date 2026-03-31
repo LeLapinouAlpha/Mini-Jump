@@ -38,7 +38,7 @@ public class PlayerAttacks : MonoBehaviour
             || this.playerAnimations.IsPlayingAnimation("RightPunching")
             || this.playerAnimations.IsPlayingAnimation("Uppercuting");
 
-        if (this.punchAction.WasPressedThisFrame() && !this.isPunching)
+        if (this.punchAction.WasPressedThisFrame() && !this.isAttacking)
         {
             if (this.comboCounter == 4)
             {
@@ -62,7 +62,7 @@ public class PlayerAttacks : MonoBehaviour
     {
         this.isKicking = this.playerAnimations.IsPlayingAnimation("Kicking");
 
-        if (this.kickAction.WasPressedThisFrame() && !this.isKicking)
+        if (this.kickAction.WasPressedThisFrame() && !this.isAttacking)
         {
             this.playerAnimations.PlayKickAnimation();
             this.ResetCombo();
