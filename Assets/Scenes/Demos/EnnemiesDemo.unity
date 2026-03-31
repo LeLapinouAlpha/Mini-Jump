@@ -3931,6 +3931,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1983663229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1595542945998410609, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_Name
+      value: FlyingWardrobe (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: facingDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.7275176
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.17278
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
 --- !u!1 &2112032737
 GameObject:
   m_ObjectHideFlags: 0
@@ -4363,69 +4432,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingWardrobe
       objectReference: {fileID: 0}
-    - target: {fileID: 1628782989260479951, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1628782989260479951, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 2
+    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_Size.x
+      value: 6.0104876
       objectReference: {fileID: 0}
     - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_Size.y
-      value: 4.476616
+      value: 3.1480672
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_Offset.x
+      value: -3.0360103
       objectReference: {fileID: 0}
     - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_Offset.y
-      value: -1.2383074
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: damage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: attackSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: vitessePlate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: spawningObject
-      value: 
-      objectReference: {fileID: 4713327640396821494, guid: c952cb90e99c20e47ac514905534b63b, type: 3}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: plateXOffsetRange
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: distanceForDespawn
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: playerPosXThreshold
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8010567163055821035, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_Size.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8010567163055821035, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_Size.y
-      value: 2
+      value: -1.9025818
       objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4481,3 +4502,4 @@ SceneRoots:
   - {fileID: 1970338335}
   - {fileID: 1721399720}
   - {fileID: 5167078949325890508}
+  - {fileID: 1983663229}

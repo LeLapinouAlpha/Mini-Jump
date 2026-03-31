@@ -24,7 +24,6 @@ public class FlyingWardrobeLogic : MonoBehaviour
     private FacingDirection initialFacingDirection;
     private bool moveAbovePlayer;
     private float playerPosX;
-    private bool isAbovePlayer;
 
     public float attackSpeed;
     float attackSpeedCounter;
@@ -35,7 +34,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float vitessePlate;
     public float distanceForDespawn;
     public int plateCount = 3;
-    public float plateXOffsetRange = 0.5f;
+    public Vector2 plateOffsetRange;
     public float playerPosXThreshold = 0.5f;
 
     void Start()
@@ -69,7 +68,6 @@ public class FlyingWardrobeLogic : MonoBehaviour
             if (this.moveAbovePlayer)
             {
                 this.currentPositionX = Mathf.MoveTowards(this.currentPositionX, this.playerPosX, this.vitesse * Time.deltaTime);
-                this.isAbovePlayer = Mathf.Approximately(this.currentPositionX, this.playerPosX);
             }
             else if (this.facingDirection == FacingDirection.Right)
             {
@@ -193,8 +191,10 @@ public class FlyingWardrobeLogic : MonoBehaviour
     {
         for (int i = 0; i < this.plateCount; i++)
         {
-            float xOffset = Mathf.Abs(this.plateXOffsetRange);
-            var position = this.transform.position + new Vector3(UnityEngine.Random.Range(-xOffset, xOffset), 0f, 0f);
+            float xOffset = Mathf.Abs(this.plateOffsetRange.x);
+            float yOffset = Mathf.Abs(this.plateOffsetRange.y);
+            var range = new Vector3(UnityEngine.Random.Range(-xOffset, xOffset), UnityEngine.Random.Range(-yOffset, yOffset), 0f);
+            var position = this.transform.position + range;
             GameObject newGameObject = Instantiate(this.spawningObject, position, Quaternion.identity, this.transform.parent);
             newGameObject.GetComponent<PlateLogic>().InitializeParameters(this.damage, this.vitessePlate, this.distanceForDespawn);
         }
