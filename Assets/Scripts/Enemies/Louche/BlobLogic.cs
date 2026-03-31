@@ -45,5 +45,4 @@ public class BlobLogic : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-
 }

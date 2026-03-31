@@ -46,7 +46,7 @@ public class LoucheLogic : MonoBehaviour
     {
         Move(canMove);
         FaceDirection();
-        
+
     }
 
     void Move(bool canMove)
@@ -111,6 +111,7 @@ public class LoucheLogic : MonoBehaviour
         }
 
     }
+
     public void SpawnBlob()
     {
         GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, Quaternion.identity, this.transform);

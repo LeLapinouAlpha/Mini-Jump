@@ -4314,8 +4314,24 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: attackSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: vitessePlate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: spawningObject
+      value: 
+      objectReference: {fileID: 4713327640396821494, guid: c952cb90e99c20e47ac514905534b63b, type: 3}
+    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: distanceForDespawn
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8010567163055821035, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_Size.x

@@ -28,6 +28,12 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float attackSpeed;
     float attackSpeedCounter;
 
+    [Header("Plate The Plate")]
+    public GameObject spawningObject;
+    public float damage;
+    public float vitessePlate;
+    public float distanceForDespawn;
+
     void Start()
     {
         initialPositionX = this.transform.position.x;
@@ -156,7 +162,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
             {
                 if (this.attackSpeedCounter >= this.attackSpeed)
                 {
-                    Debug.Log("Wardrobe is attacking the player!");
+                    this.SpawnPlate();
 
                     this.attackSpeedCounter = 0f;
                 }
@@ -182,5 +188,11 @@ public class FlyingWardrobeLogic : MonoBehaviour
             canMove = true;
             this.moveAbovePlayer = false;
         }
+    }
+
+    public void SpawnPlate()
+    {
+        GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, Quaternion.identity, this.transform.parent);
+        newGameObject.GetComponent<PlateLogic>().InitializeParameters(this.damage, this.vitessePlate, this.distanceForDespawn);
     }
 }
