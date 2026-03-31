@@ -4289,6 +4289,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingWardrobe
       objectReference: {fileID: 0}
+    - target: {fileID: 1628782989260479951, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628782989260479951, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_Size.y
+      value: 4.476616
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.2383074
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: attackSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010567163055821035, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010567163055821035, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.92
