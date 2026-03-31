@@ -1,7 +1,6 @@
-using Unity.VectorGraphics;
+using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls player movement, jumping, sprinting, wall sliding, and wall jumping behaviors in a 2D platformer
@@ -15,15 +14,6 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(PlayerAnimations))]
 public class PlayerMovements : MonoBehaviour
 {
-    /// <summary>
-    /// Specifies the horizontal facing direction, typically used to indicate whether an entity is facing right or left.
-    /// </summary>
-    public enum FacingDirection
-    {
-        Right = 1,
-        Left = -1
-    }
-
     [Header("Components References")]
     private PlayerAnimations playerAnimations;
     private Rigidbody2D playerRigidbody;

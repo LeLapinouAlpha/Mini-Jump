@@ -1,15 +1,9 @@
-using Unity.Mathematics;
+using Assets.Scripts.Utils;
 using UnityEngine;
 
 [RequireComponent(typeof(FlyingWardrobeAnimations))]
 public class FlyingWardrobeLogic : MonoBehaviour
 {
-    public enum FacingDirection
-    {
-        Left,
-        Right
-    }
-
     [Header("Components References")]
     public FlyingWardrobeAnimations animations;
 
