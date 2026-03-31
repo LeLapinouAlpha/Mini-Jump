@@ -161,21 +161,19 @@ public class FlyingWardrobeLogic : MonoBehaviour
             this.moveAbovePlayer = true;
             this.playerPosX = collision.transform.position.x;
 
-            if (this.isAbovePlayer)
+            if (this.attackSpeedCounter >= this.attackSpeed)
             {
-                if (this.attackSpeedCounter >= this.attackSpeed)
-                {
-                    this.SpawnPlates();
+                if (this.isAbovePlayer)
+                { 
+                    this.SpawnPlates(); 
+                }
 
-                    this.attackSpeedCounter = 0f;
-                }
-                else
-                {
-                    this.attackSpeedCounter += Time.deltaTime;
-                }
+                this.attackSpeedCounter = 0f;
             }
-
-
+            else
+            {
+                this.attackSpeedCounter += Time.deltaTime;
+            }
         }
         else
         {
