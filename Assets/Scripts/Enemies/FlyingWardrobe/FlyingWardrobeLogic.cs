@@ -23,6 +23,10 @@ public class FlyingWardrobeLogic : MonoBehaviour
     private FacingDirection initialFacingDirection;
     private bool moveAbovePlayer;
     private float playerPosX;
+    private bool isAbovePlayer;
+
+    public float attackSpeed;
+    float attackSpeedCounter;
 
     void Start()
     {
@@ -37,6 +41,7 @@ public class FlyingWardrobeLogic : MonoBehaviour
         this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
         this.initialFacingDirection = facingDirection;
         this.moveAbovePlayer = false;
+        this.attackSpeedCounter = this.attackSpeed;
     }
 
     void Update()
@@ -49,12 +54,12 @@ public class FlyingWardrobeLogic : MonoBehaviour
     {
         if (canMove)
         {
-            //animationsScript.PlayWalkAnimation(true);
             RightOrLeft();
 
             if (this.moveAbovePlayer)
             {
                 this.currentPositionX = Mathf.MoveTowards(this.currentPositionX, this.playerPosX, this.vitesse * Time.deltaTime);
+                this.isAbovePlayer = Mathf.Approximately(this.currentPositionX, this.playerPosX);
             }
             else if (this.facingDirection == FacingDirection.Right)
             {
@@ -147,17 +152,21 @@ public class FlyingWardrobeLogic : MonoBehaviour
             this.moveAbovePlayer = true;
             this.playerPosX = collision.transform.position.x;
 
-            //canMove = false;
-            //if (attackSpeedCounter >= attackSpeed)
-            //{
-            //    attackSpeedCounter = 0;
-            //    this.spriteRenderer.flipX = collision.transform.position.x > this.transform.position.x;
-            //    this.animationsScript.animator.Play("Attack");
-            //}
-            //else
-            //{
-            //    attackSpeedCounter += Time.deltaTime;
-            //}
+            if (this.isAbovePlayer)
+            {
+                if (this.attackSpeedCounter >= this.attackSpeed)
+                {
+                    Debug.Log("Wardrobe is attacking the player!");
+
+                    this.attackSpeedCounter = 0f;
+                }
+                else
+                {
+                    this.attackSpeedCounter += Time.deltaTime;
+                }
+            }
+
+
         }
         else
         {
