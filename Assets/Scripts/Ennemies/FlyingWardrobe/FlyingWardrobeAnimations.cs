@@ -29,8 +29,4 @@ public class FlyingWardrobeAnimations : MonoBehaviour
     {
         this.animator = this.animator.GetComponent<Animator>();
     }
-
-    void Update()
-    {
-    }
 }

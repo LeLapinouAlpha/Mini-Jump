@@ -3549,6 +3549,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &566994259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+  m_PrefabInstance: {fileID: 5167078949325890508}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f17138746eac1aa43ac5a4dc71604dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlyingWardrobeLogic
 --- !u!1001 &986303364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4410,34 +4421,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingWardrobe
       objectReference: {fileID: 0}
-    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_Size.x
-      value: 6.0104876
+    - target: {fileID: 8046258286837283020, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: attackSpeed
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_Size.y
-      value: 3.1480672
+    - target: {fileID: 8046258286837283020, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: conditions.Array.size
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_Offset.x
-      value: -3.0360103
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769612946509033244, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_Offset.y
-      value: -1.9025818
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: platePrefab
+    - target: {fileID: 8046258286837283020, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: 'conditions.Array.data[0]'
       value: 
-      objectReference: {fileID: 4713327640396821494, guid: c952cb90e99c20e47ac514905534b63b, type: 3}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: plateDespawnDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 566994259}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.71

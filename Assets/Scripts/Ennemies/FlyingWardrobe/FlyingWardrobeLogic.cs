@@ -1,8 +1,9 @@
+using Assets.Scripts.Gameplay;
 using Assets.Scripts.Utils;
 using UnityEngine;
 
-[RequireComponent(typeof(FlyingWardrobeAnimations))]
-public class FlyingWardrobeLogic : MonoBehaviour
+[RequireComponent(typeof(FlyingWardrobeAnimations)), RequireComponent(typeof(PeriodicAttack))]
+public class FlyingWardrobeLogic : MonoBehaviour, IAttackCondition
 {
     [Header("Components References")]
     public FlyingWardrobeAnimations animations;
@@ -11,10 +12,8 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float travellingDistance;
     public float velocity;
     public FacingDirection initialFacingDirection;
-    private bool moveAbovePlayer;
 
     [Header("Attack Parameters")]
-    public float attackSpeed;
     public int plateCount = 3;
     public Vector2 plateOffsetRange;
     public float spawnTriggerDistThresh = 0.5f;
@@ -26,153 +25,31 @@ public class FlyingWardrobeLogic : MonoBehaviour
     public float plateDespawnDistance;
 
     [Header("States")]
-    private float currentPositionX;
-    private float initialPositionX;
     private bool canMove;
+    private Vector3 currentPosition;
+    private Vector3 initialPosition;
     private FacingDirection facingDirection;
-    private float playerPosX;
-    private float attackSpeedCounter;
+    private Vector3 playerPos;
+    private bool moveAbovePlayer;
+
+    private void FindComponents()
+    {
+        this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
+    }
+
+    private void InitializeStates()
+    {
+        this.initialPosition = this.transform.position;
+        this.currentPosition = this.initialPosition;
+        this.canMove = true;
+        this.facingDirection = this.initialFacingDirection;
+        this.moveAbovePlayer = false;
+    }
 
     void Start()
     {
-        this.initialPositionX = this.transform.position.x;
-        this.currentPositionX = this.transform.position.x;
-
-        this.canMove = true;
-
-        this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
-        this.facingDirection = initialFacingDirection;
-        this.moveAbovePlayer = false;
-        this.attackSpeedCounter = this.attackSpeed;
-    }
-
-    void Update()
-    {
-        Move();
-        FaceDirection();
-    }
-
-    private void Move()
-    {
-        if (!this.canMove)
-        {
-            return;
-        }
-
-        RightOrLeft();
-
-        if (this.moveAbovePlayer)
-        {
-            this.currentPositionX = Mathf.MoveTowards(this.currentPositionX, this.playerPosX, this.velocity * Time.deltaTime);
-        }
-        else if (this.facingDirection == FacingDirection.Right)
-        {
-            this.currentPositionX += this.velocity * Time.deltaTime;
-        }
-        else
-        {
-            this.currentPositionX -= this.velocity * Time.deltaTime;
-        }
-
-        var movement = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
-        if (this.animations.IsInState("Flying"))
-        {
-            movement += this.animations.GetVerticalOffset();
-        }
-
-        this.transform.position = movement;
-    }
-
-    private void RightOrLeft()
-    {
-        if (this.moveAbovePlayer)
-        {
-            // Update facing direction based on the player position relative to enemy
-            if (this.currentPositionX < this.playerPosX - 0.05f)
-            {
-                this.facingDirection = FacingDirection.Right;
-            }
-            else if (currentPositionX > playerPosX + 0.05f)
-            {
-                this.facingDirection = FacingDirection.Left;
-            }
-        }
-        else
-        {
-            if (this.initialFacingDirection == FacingDirection.Right)
-            {
-                float targetX = this.initialPositionX + this.travellingDistance;
-                if (this.currentPositionX < this.initialPositionX)
-                {
-                    this.facingDirection = FacingDirection.Right;
-                }
-                else if (currentPositionX > targetX)
-                {
-                    this.facingDirection = FacingDirection.Left;
-                }
-            }
-            else
-            {
-                float targetX = this.initialPositionX - this.travellingDistance;
-                if (this.currentPositionX > this.initialPositionX)
-                {
-                    this.facingDirection = FacingDirection.Left;
-                }
-                else if (this.currentPositionX < targetX)
-                {
-                    this.facingDirection = FacingDirection.Right;
-                }
-            }
-        }
-    }
-
-    private void FaceDirection()
-    {
-        Vector3 currentScale = this.transform.localScale;
-        if (this.facingDirection == FacingDirection.Right && currentScale.x > 0)
-        {
-            currentScale.x = -Mathf.Abs(currentScale.x);
-            this.transform.localScale = currentScale;
-        }
-        else if (this.facingDirection == FacingDirection.Left && currentScale.x < 0)
-        {
-            currentScale.x = Mathf.Abs(currentScale.x);
-            this.transform.localScale = currentScale;
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            this.moveAbovePlayer = true;
-            this.playerPosX = collision.transform.position.x;
-
-            if (this.attackSpeedCounter >= this.attackSpeed && this.IsNearPlayer())
-            {
-                this.SpawnPlates();
-
-                this.attackSpeedCounter = 0f;
-            }
-            else
-            {
-                this.attackSpeedCounter += Time.deltaTime;
-            }
-        }
-        else
-        {
-            this.moveAbovePlayer = false;
-        }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            this.canMove = true;
-            this.moveAbovePlayer = false;
-        }
+        this.FindComponents();
+        this.InitializeStates();
     }
 
     private Vector3 GeneratePlatePosition()
@@ -195,6 +72,133 @@ public class FlyingWardrobeLogic : MonoBehaviour
 
     private bool IsNearPlayer()
     {
-        return Mathf.Abs(this.currentPositionX - this.playerPosX) <= Mathf.Abs(this.spawnTriggerDistThresh);
+        return Mathf.Abs(this.currentPosition.x - this.playerPos.x) <= Mathf.Abs(this.spawnTriggerDistThresh);
+    }
+
+    private void Move()
+    {
+        if (!this.canMove)
+        {
+            return;
+        }
+
+        RightOrLeft();
+
+        if (this.moveAbovePlayer)
+        {
+            this.currentPosition.x = Mathf.MoveTowards(this.currentPosition.x, this.playerPos.x, this.velocity * Time.deltaTime);
+        }
+        else if (this.facingDirection == FacingDirection.Right)
+        {
+            this.currentPosition.x += this.velocity * Time.deltaTime;
+        }
+        else
+        {
+            this.currentPosition.x -= this.velocity * Time.deltaTime;
+        }
+
+        var movement = new Vector3(this.currentPosition.x, this.transform.position.y, this.transform.position.z);
+        if (this.animations.IsInState("Flying"))
+        {
+            movement += this.animations.GetVerticalOffset();
+        }
+
+        this.transform.position = movement;
+    }
+
+    private void RightOrLeft()
+    {
+        if (this.moveAbovePlayer)
+        {
+            // Update facing direction based on the player position relative to enemy
+            if (this.currentPosition.x < this.playerPos.x - 0.05f)
+            {
+                this.facingDirection = FacingDirection.Right;
+            }
+            else if (currentPosition.x > playerPos.x + 0.05f)
+            {
+                this.facingDirection = FacingDirection.Left;
+            }
+        }
+        else
+        {
+            if (this.initialFacingDirection == FacingDirection.Right)
+            {
+                float targetX = this.initialPosition.x + this.travellingDistance;
+                if (this.currentPosition.x < this.initialPosition.x)
+                {
+                    this.facingDirection = FacingDirection.Right;
+                }
+                else if (currentPosition.x > targetX)
+                {
+                    this.facingDirection = FacingDirection.Left;
+                }
+            }
+            else
+            {
+                float targetX = this.initialPosition.x - this.travellingDistance;
+                if (this.currentPosition.x > this.initialPosition.x)
+                {
+                    this.facingDirection = FacingDirection.Left;
+                }
+                else if (this.currentPosition.x < targetX)
+                {
+                    this.facingDirection = FacingDirection.Right;
+                }
+            }
+        }
+    }
+
+    private void FaceDirection()
+    {
+        Vector3 currentScale = this.transform.localScale;
+        if (this.facingDirection == FacingDirection.Right && currentScale.x > 0)
+        {
+            currentScale.x = -Mathf.Abs(currentScale.x);
+            this.transform.localScale = currentScale;
+        }
+        else if (this.facingDirection == FacingDirection.Left && currentScale.x < 0)
+        {
+            currentScale.x = Mathf.Abs(currentScale.x);
+            this.transform.localScale = currentScale;
+        }
+    }
+
+    void Update()
+    {
+        Move();
+        FaceDirection();
+    }
+
+    public void Attack()
+    {
+        this.SpawnPlates();
+    }
+
+    public bool CanAttack()
+    {
+        return this.IsNearPlayer();
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            this.moveAbovePlayer = true;
+            this.playerPos.x = collision.transform.position.x;
+        }
+        else
+        {
+            this.moveAbovePlayer = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            this.canMove = true;
+            this.moveAbovePlayer = false;
+        }
     }
 }
