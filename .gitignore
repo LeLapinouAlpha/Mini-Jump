@@ -98,6 +98,6 @@ InitTestScene*.unity*
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
-# Other files to ignore
-.DS_Store
+# Editor settings
 .idea/
+.vscode/
