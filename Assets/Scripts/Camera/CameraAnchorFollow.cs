@@ -21,19 +21,24 @@ public class CameraAnchorFollow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.cameraFollow != null)
+        if (collision.CompareTag("Player"))
         {
-            this.cameraFollow.objectToFollow = this.target;
-            this.cameraFollow.GetComponentInParent<Camera>().orthographicSize = this.cameraSize;
+            if (this.cameraFollow != null)
+            {
+                this.cameraFollow.objectToFollow = this.target;
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (this.cameraFollow != null)
+        if (collision.CompareTag("Player"))
         {
-            this.cameraFollow.GetComponentInParent<Camera>().orthographicSize = this.initialCameraSize;
-            this.cameraFollow.objectToFollow = this.initialTarget;
+            if (this.cameraFollow != null)
+            {
+                this.cameraFollow.objectToFollow = this.initialTarget;
+            }
         }
+
     }
 }
