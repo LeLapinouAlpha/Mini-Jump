@@ -244,7 +244,7 @@ MonoBehaviour:
   groundCheckRadius: 0.1
   wallLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   wallCheckLeft: {fileID: 1065886517841341050}
   wallCheckRight: {fileID: 1219765665193168501}
   wallCheckRadius: 0.1
