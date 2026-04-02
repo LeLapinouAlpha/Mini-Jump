@@ -4553,11 +4553,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 999305066338935832, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27999997
+      value: 0.26799998
       objectReference: {fileID: 0}
     - target: {fileID: 5014605718886437934, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.02
+      value: -0.032
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031243241513355351, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5078661870690564114, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_Name
