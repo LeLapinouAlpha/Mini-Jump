@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3656771761604509762}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0.26699996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,9 +43,11 @@ GameObject:
   - component: {fileID: 2984635924213196760}
   - component: {fileID: 8534086016367623788}
   - component: {fileID: 5031243241513355351}
-  - component: {fileID: 4885619198743931341}
+  - component: {fileID: 2033517039231499194}
   - component: {fileID: 7061262411476875032}
   - component: {fileID: 8044783972774897630}
+  - component: {fileID: 5921639513956294341}
+  - component: {fileID: 6750748359676239097}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -119,12 +121,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1304176391, guid: db39feb4b85d06d4e82e1d090445944a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2750ed2c1cf379d47b0074dc52f3483c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.26, y: 0.39}
+  m_Size: {x: 0.390625, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -175,11 +177,11 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 1
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &4885619198743931341
-CapsuleCollider2D:
+--- !u!61 &2033517039231499194
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -212,9 +214,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.3046875}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.40625, y: 0.609375}
+    newSize: {x: 0.390625, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Size: {x: 0.40625, y: 0.609375}
-  m_Direction: 0
+  m_EdgeRadius: 0
 --- !u!114 &7061262411476875032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,39 +238,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a96b33ae9802134aac10b001a6a2e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovements
-  walkSpeed: 3
-  sprintSpeedMultiplier: 2
-  jumpForce: 7
-  horizontalWallJumpForce: 5
-  verticalWallJumpForce: 7
+  canMove: 1
+  groundJumpForce: 7
   defaultGravityScale: 1
   fallGravityScale: 3
-  isWallSliding: 0
+  walkSpeed: 3
+  sprintSpeedMultiplier: 2
+  wallJumpingDuration: 0.4
+  wallJumpForceX: 5
+  wallJumpForceY: 7
   wallSlidingSpeed: 1
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
-  groundCheck: {fileID: 5014605718886437934}
+  groundCheck: {fileID: 0}
   groundCheckRadius: 0.1
   wallLayers:
     serializedVersion: 2
     m_Bits: 128
   wallCheck: {fileID: 0}
   wallCheckRadius: 0.1
-  movement: {x: 0, y: 0}
-  isGrounded: 0
-  isGroundJumping: 0
-  isFalling: 0
-  isSprinting: 0
-  isTouchingWall: 0
-  isWallJumping: 0
-  wallNormal: {x: 0, y: 0}
-  wallJumpForce: {x: 5, y: 7}
-  wallJumpingDirection: {x: 0, y: 0}
-  wallJumpingCounter: 0
-  wallJumpingDuration: 0.4
-  wallJumpingPower: {x: 8, y: 16}
-  facingDirection: 1
 --- !u!114 &8044783972774897630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,8 +270,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15559d292ef1e5d4288504d1e839569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimations
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+--- !u!114 &5921639513956294341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078661870690564114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037087e9a3bd82037a6b3f7ae5346e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttacks
+  playerAnimations: {fileID: 0}
+  playerMovements: {fileID: 0}
+  punchAction:
+    m_Name: Punch
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ffd6610e-958c-467f-b5ab-7726f3f440a1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  kickAction:
+    m_Name: Kick
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ac9f7cb4-e2f7-484c-95ca-a025182712b5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  comboResetTime: 1
+--- !u!114 &6750748359676239097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078661870690564114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec03f13632bdb749913aa2d5d2fadef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  moneyHealth: 100
 --- !u!1 &7263344925355914060
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 7263344925355914060}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: 0}
+  m_LocalPosition: {x: 0, y: -0.033, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
