@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7742050798653345066}
   - component: {fileID: 1224357503771172133}
   - component: {fileID: 8046258286837283020}
+  - component: {fileID: 5412422174377829964}
   m_Layer: 0
   m_Name: FlyingWardrobe
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 1595542945998410609}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.92, y: 2.2, z: 0}
+  m_LocalPosition: {x: -0.19400233, y: 2.21, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,7 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyingWardrobeLogic
   animations: {fileID: 1224357503771172133}
-  periodicAttack: {fileID: 0}
   travellingDistance: 5
   velocity: 1
   initialFacingDirection: 0
@@ -280,3 +280,35 @@ MonoBehaviour:
         m_CallState: 2
   conditions:
   - {fileID: 7742050798653345066}
+  conditionCheckType: 0
+--- !u!114 &5412422174377829964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595542945998410609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f05de67a8dec7c4aa7ba8a81185e46e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PatrolMover
+  canMove: 1
+  travellingDistance: 5
+  velocity: 1
+  initialFacingDirection: -1
+  onMovementComputed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7742050798653345066}
+        m_TargetAssemblyTypeName: FlyingWardrobeLogic, Assembly-CSharp
+        m_MethodName: OnMovementComputed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
