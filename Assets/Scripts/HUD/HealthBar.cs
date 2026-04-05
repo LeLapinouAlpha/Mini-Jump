@@ -23,26 +23,23 @@ public class HealthBar : MonoBehaviour
 
         this.maxHP = 100f;
         this.currentHP= maxHP;
-
-        SetHP(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // TODO : Mettre à jour le rendu de la barre de vie
-        //avec la valeur d'hp courante
-    }
     public void SetHP(float value)
     {
+        if (value <= 0) 
+        {
+            this.currentHP = 0;
+        }
         if (value <= maxHP)
         {
             this.currentHP = value;
         }
+        else
+        {
+            this.currentHP = maxHP;
+        }
         TextureSelecter();
-        // TODO : Vérifier que la valeur est valide (négative
-        //? trop grande ?)
-        // avant de mettre à jour la variable d'instance hp.
     }
 
     void TextureSelecter()
@@ -55,5 +52,4 @@ public class HealthBar : MonoBehaviour
     {
         return this.currentHP;
     }
-
 }
