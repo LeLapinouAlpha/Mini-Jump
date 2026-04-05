@@ -20,9 +20,6 @@ public class FlyingWardrobeLogic : MonoBehaviour, IAttackCondition
     public float plateVelocity;
     public float plateDespawnDistance;
 
-    [Header("States")]
-    private Vector3 currentPosition;
-
     private void FindComponents()
     {
         this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
