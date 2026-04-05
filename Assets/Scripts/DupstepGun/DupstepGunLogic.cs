@@ -4,22 +4,20 @@ using UnityEngine.InputSystem;
 
 public class DupstepGunLogic : MonoBehaviour
 {
-    public float musicDuration;
+    //public float musicDuration;
 
     public float cooldown;
+    public float distanceForDespawn;
     float counter;
 
     public Transform gunTransform;
-
-    [Header("Keybinds")]
-    public InputAction shootAction;
+    InputAction shootAction;
 
     bool isEquipped;
 
     [Header("Projectile")]
     public GameObject spawningObject;
     public float vitesse;
-    public float distanceForDespawn;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,13 +28,16 @@ public class DupstepGunLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isEquipped && this.shootAction.WasPressedThisFrame() && counter >= cooldown)
+        if (this.isEquipped && this.shootAction.WasPressedThisFrame() && this.counter >= this.cooldown)
         {
-            GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, Quaternion.identity, this.transform);
+            GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, this.transform.rotation);
+            newGameObject.GetComponent<ProjectileLogic>().vitesse = this.vitesse;
+            newGameObject.GetComponent<ProjectileLogic>().distanceForDespawn = this.distanceForDespawn;
+            this.counter = 0;
         }
         else
         {
-            counter += Time.deltaTime;
+            this.counter += Time.deltaTime;
         }
     }
 
