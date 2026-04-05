@@ -4,14 +4,17 @@ using System;
 public class ProjectileLogic : MonoBehaviour
 {
     float currentPositionX;
+    float currentPositionY;
     float initialPositionX;
 
-    public float vitesse;
+    public float vitesseHorizontale;
+    public float vitesseVerticale;
     public float distanceForDespawn;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentPositionX = this.transform.position.x;
+        currentPositionY = this.transform.position.y;
         initialPositionX = this.transform.position.x;
     }
 
@@ -25,13 +28,20 @@ public class ProjectileLogic : MonoBehaviour
 
         if (this.transform.rotation.z > 0)
         {
-            this.currentPositionX += this.vitesse * Time.deltaTime;
-            this.transform.position = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
+            this.currentPositionX += this.vitesseHorizontale * Time.deltaTime;
+            this.currentPositionY += this.vitesseVerticale * Time.deltaTime;
+
+            this.transform.position = new Vector3(this.currentPositionX, this.currentPositionY, this.transform.position.z);
         }
         else
         {
-            this.currentPositionX -= this.vitesse * Time.deltaTime;
-            this.transform.position = new Vector3(this.currentPositionX, this.transform.position.y, this.transform.position.z);
+            this.currentPositionX -= this.vitesseHorizontale * Time.deltaTime;
+            this.currentPositionY += this.vitesseVerticale * Time.deltaTime;
+            this.transform.position = new Vector3(this.currentPositionX, this.currentPositionY, this.transform.position.z);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        this.gameObject.SetActive(false);
     }
 }

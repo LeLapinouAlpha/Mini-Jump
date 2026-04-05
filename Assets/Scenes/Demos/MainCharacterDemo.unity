@@ -4860,8 +4860,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3460122996375441372, guid: 7e4985016877a4246bd61e6523e63519, type: 3}
     - target: {fileID: 300588863311964362, guid: 9c8fb264634b7e343ba1a693b10767c2, type: 3}
+      propertyPath: vitesseVerticale
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 300588863311964362, guid: 9c8fb264634b7e343ba1a693b10767c2, type: 3}
       propertyPath: distanceForDespawn
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 300588863311964362, guid: 9c8fb264634b7e343ba1a693b10767c2, type: 3}
+      propertyPath: vitesseHorizontale
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 934834106921398620, guid: 9c8fb264634b7e343ba1a693b10767c2, type: 3}
       propertyPath: m_LocalPosition.x

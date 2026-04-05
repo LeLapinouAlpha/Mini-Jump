@@ -17,7 +17,8 @@ public class DupstepGunLogic : MonoBehaviour
 
     [Header("Projectile")]
     public GameObject spawningObject;
-    public float vitesse;
+    public float vitesseHorizontale;
+    public float vitesseVerticale;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +32,8 @@ public class DupstepGunLogic : MonoBehaviour
         if (this.isEquipped && this.shootAction.WasPressedThisFrame() && this.counter >= this.cooldown)
         {
             GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, this.transform.rotation);
-            newGameObject.GetComponent<ProjectileLogic>().vitesse = this.vitesse;
+            newGameObject.GetComponent<ProjectileLogic>().vitesseHorizontale = this.vitesseHorizontale;
+            newGameObject.GetComponent<ProjectileLogic>().vitesseVerticale = this.vitesseVerticale;
             newGameObject.GetComponent<ProjectileLogic>().distanceForDespawn = this.distanceForDespawn;
             this.counter = 0;
         }
