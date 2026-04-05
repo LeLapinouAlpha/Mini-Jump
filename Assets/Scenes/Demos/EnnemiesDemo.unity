@@ -3549,7 +3549,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1001 &337871387
+--- !u!1001 &412617028
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3559,23 +3559,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1595542945998410609, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_Name
-      value: FlyingWardrobe (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5412422174377829964, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: followPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5412422174377829964, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: initialFacingDirection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: spawnTriggerDistThresh
-      value: 3
+      value: FlyingWardrobe
       objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.65
+      value: -9.36
       objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3618,7 +3606,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
---- !u!1001 &412617028
+--- !u!1001 &748044316
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3628,23 +3616,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1595542945998410609, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_Name
-      value: FlyingWardrobe
-      objectReference: {fileID: 0}
-    - target: {fileID: 5412422174377829964, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: followPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742050798653345066, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
-      propertyPath: spawnTriggerDistThresh
-      value: 3
+      value: FlyingWardrobe (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.36
+      value: -11.905159
       objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4214
+      value: 1.3679419
       objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3742,7 +3722,7 @@ PrefabInstance:
     - target: {fileID: 2984635924213196760, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2750ed2c1cf379d47b0074dc52f3483c, type: 3}
+      objectReference: {fileID: 1304176391, guid: db39feb4b85d06d4e82e1d090445944a, type: 3}
     - target: {fileID: 5031243241513355351, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_SleepingMode
       value: 0
@@ -3887,6 +3867,10 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 986303367}
+    - target: {fileID: 6413864727666719586, guid: 3aa8594aa23e2ad43b029240533552da, type: 3}
+      propertyPath: travellingDistance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4480,4 +4464,4 @@ SceneRoots:
   - {fileID: 1970338335}
   - {fileID: 1721399720}
   - {fileID: 412617028}
-  - {fileID: 337871387}
+  - {fileID: 748044316}

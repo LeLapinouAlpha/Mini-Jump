@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8010567163055821035}
   - component: {fileID: 7472035305735308555}
   - component: {fileID: 1628782989260479951}
+  - component: {fileID: 8237119861518289594}
   - component: {fileID: 3769612946509033244}
   - component: {fileID: 7742050798653345066}
   - component: {fileID: 1224357503771172133}
@@ -133,7 +134,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -166,6 +167,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5732117, y: 0.9546771}
   m_EdgeRadius: 0
+--- !u!50 &8237119861518289594
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595542945998410609}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &3769612946509033244
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -225,12 +253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyingWardrobeLogic
   animations: {fileID: 1224357503771172133}
-  travellingDistance: 5
-  velocity: 1
-  initialFacingDirection: 0
+  patrolMover: {fileID: 0}
   plateCount: 3
   plateOffsetRange: {x: 0.75, y: 0.1}
-  spawnTriggerDistThresh: 0.5
+  spawnTriggerDistThresh: 3
   platePrefab: {fileID: 4713327640396821494, guid: c952cb90e99c20e47ac514905534b63b, type: 3}
   plateDamage: 50
   plateVelocity: 3
@@ -294,6 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrolMover
   canMove: 1
+  followPlayer: 1
   travellingDistance: 5
   velocity: 1
   initialFacingDirection: -1
@@ -312,3 +339,5 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  playerPos: {x: 0, y: 0, z: 0}
+  moveAbovePlayer: 0
