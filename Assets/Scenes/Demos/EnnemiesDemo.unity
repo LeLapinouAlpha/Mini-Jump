@@ -3561,6 +3561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingWardrobe
       objectReference: {fileID: 0}
+    - target: {fileID: 1595542945998410609, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
+      propertyPath: m_TagString
+      value: Ennemies
+      objectReference: {fileID: 0}
     - target: {fileID: 8570733620144322624, guid: 5e5080198523c2143868806bdd0a7673, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.36

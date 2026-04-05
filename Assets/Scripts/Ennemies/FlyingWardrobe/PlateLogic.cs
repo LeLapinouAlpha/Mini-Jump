@@ -43,6 +43,9 @@ public class PlateLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Object.Destroy(this.gameObject);
+        if (!collision.CompareTag("Ennemies"))
+        {
+            Object.Destroy(this.gameObject);
+        }
     }
 }
