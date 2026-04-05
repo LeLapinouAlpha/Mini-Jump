@@ -21,7 +21,7 @@ public class HealthBar : MonoBehaviour
         this.rawImage = GetComponent<RawImage>();
         textureCount = this.textures.Length - 1;
 
-        this.maxHP = 100f;
+        this.maxHP = 100f; // HARDCODE
         this.currentHP= maxHP;
     }
 
