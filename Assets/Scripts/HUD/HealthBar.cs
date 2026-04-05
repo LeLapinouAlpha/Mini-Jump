@@ -21,7 +21,7 @@ public class HealthBar : MonoBehaviour
         this.rawImage = GetComponent<RawImage>();
         textureCount = this.textures.Length - 1;
 
-        this.maxHP = 100f; // HARDCODE
+        this.maxHP = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().moneyHealth;
         this.currentHP= maxHP;
     }
 
@@ -31,11 +31,11 @@ public class HealthBar : MonoBehaviour
         {
             this.currentHP = 0;
         }
-        if (value <= maxHP)
+        if (value <= maxHP && value > 0)
         {
             this.currentHP = value;
         }
-        else
+        if (value >= maxHP) 
         {
             this.currentHP = maxHP;
         }
@@ -45,6 +45,7 @@ public class HealthBar : MonoBehaviour
     void TextureSelecter()
     {
         int index = (int)(currentHP / maxHP * textureCount);
+        Debug.Log("The index is " + index);
         this.rawImage.texture = textures[index];
     }
 
