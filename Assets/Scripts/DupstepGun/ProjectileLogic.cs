@@ -10,12 +10,17 @@ public class ProjectileLogic : MonoBehaviour
     public float vitesseHorizontale;
     public float vitesseVerticale;
     public float distanceForDespawn;
+
+    bool moveRight;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentPositionX = this.transform.position.x;
         currentPositionY = this.transform.position.y;
         initialPositionX = this.transform.position.x;
+
+        this.moveRight = (this.transform.lossyScale.x > 0);
     }
 
     // Update is called once per frame
@@ -23,10 +28,10 @@ public class ProjectileLogic : MonoBehaviour
     {
         if(Math.Abs(currentPositionX) >= Math.Abs(initialPositionX) + distanceForDespawn)
         {
-            this.gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
 
-        if (this.transform.rotation.z > 0)
+        if (this.moveRight)
         {
             this.currentPositionX += this.vitesseHorizontale * Time.deltaTime;
             this.currentPositionY += this.vitesseVerticale * Time.deltaTime;
@@ -42,6 +47,6 @@ public class ProjectileLogic : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }

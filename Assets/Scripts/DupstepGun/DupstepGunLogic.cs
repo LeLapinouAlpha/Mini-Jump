@@ -31,10 +31,11 @@ public class DupstepGunLogic : MonoBehaviour
     {
         if (this.isEquipped && this.shootAction.WasPressedThisFrame() && this.counter >= this.cooldown)
         {
-            GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, this.transform.rotation);
+            GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, this.transform.rotation, this.transform);
             newGameObject.GetComponent<ProjectileLogic>().vitesseHorizontale = this.vitesseHorizontale;
             newGameObject.GetComponent<ProjectileLogic>().vitesseVerticale = this.vitesseVerticale;
             newGameObject.GetComponent<ProjectileLogic>().distanceForDespawn = this.distanceForDespawn;
+
             this.counter = 0;
         }
         else
