@@ -18,8 +18,8 @@ public class PatrolMover : MonoBehaviour
     private Vector3 currentPosition;
     private Vector3 initialPosition;
     private FacingDirection facingDirection;
-    private Vector3 playerPos;
-    private bool moveAbovePlayer;
+    public Vector3 playerPos;
+    public bool moveAbovePlayer;
 
 
     private void InitializeStates()
@@ -116,6 +116,7 @@ public class PatrolMover : MonoBehaviour
 
         var movement = new Vector3(this.currentPosition.x, this.transform.position.y, this.transform.position.z);
         this.onMovementComputed?.Invoke(movement);
+        this.currentPosition = this.transform.position;
     }
 
     void Update()

@@ -7,6 +7,7 @@ public class FlyingWardrobeLogic : MonoBehaviour, IAttackCondition
 {
     [Header("Components References")]
     public FlyingWardrobeAnimations animations;
+    public PatrolMover patrolMover;
 
     [Header("Attack Parameters")]
     public int plateCount = 3;
@@ -21,11 +22,11 @@ public class FlyingWardrobeLogic : MonoBehaviour, IAttackCondition
 
     [Header("States")]
     private Vector3 currentPosition;
-    private Vector3 playerPos;
 
     private void FindComponents()
     {
         this.animations = this.animations.GetComponent<FlyingWardrobeAnimations>();
+        this.patrolMover = this.GetComponent<PatrolMover>();
     }
 
     void Start()
@@ -53,7 +54,14 @@ public class FlyingWardrobeLogic : MonoBehaviour, IAttackCondition
 
     private bool IsNearPlayer()
     {
-        return Mathf.Abs(this.currentPosition.x - this.playerPos.x) <= Mathf.Abs(this.spawnTriggerDistThresh);
+        if (!this.patrolMover.moveAbovePlayer)
+        {
+            return false;
+        }
+
+        float distance = Mathf.Abs(this.transform.position.x - this.patrolMover.playerPos.x);
+
+        return distance <= Mathf.Abs(this.spawnTriggerDistThresh);
     }
 
     public void Attack()
