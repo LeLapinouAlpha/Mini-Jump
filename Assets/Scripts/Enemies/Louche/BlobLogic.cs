@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class BlobLogic : MonoBehaviour
 {
-    Transform parentTransform;
     public bool isRight;
 
     float currentPositionX;
@@ -16,7 +15,6 @@ public class BlobLogic : MonoBehaviour
         initialPositionX = this.transform.position.x;
         currentPositionX = this.transform.position.x;
 
-        parentTransform = GetComponentInParent<Transform>();
         vitesse = GetComponentInParent<LoucheLogic>().vitesseBlob;
         distanceForDespawn = GetComponentInParent<LoucheLogic>().distanceForDespawn;
     }
