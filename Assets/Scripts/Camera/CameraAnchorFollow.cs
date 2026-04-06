@@ -26,6 +26,7 @@ public class CameraAnchorFollow : MonoBehaviour
             if (this.cameraFollow != null)
             {
                 this.cameraFollow.objectToFollow = this.target;
+                Camera.main.orthographicSize = this.cameraSize;
             }
         }
     }
@@ -36,6 +37,7 @@ public class CameraAnchorFollow : MonoBehaviour
         {
             if (this.cameraFollow != null)
             {
+                Camera.main.orthographicSize = this.initialCameraSize;
                 this.cameraFollow.objectToFollow = this.initialTarget;
             }
         }
