@@ -28,7 +28,7 @@ public class ProjectileLogic : MonoBehaviour
     {
         if(Math.Abs(currentPositionX) >= Math.Abs(initialPositionX) + distanceForDespawn)
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
 
         if (this.moveRight)
@@ -47,6 +47,6 @@ public class ProjectileLogic : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(this.gameObject);
+        this.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

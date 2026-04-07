@@ -4708,10 +4708,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Projectiles
       objectReference: {fileID: 0}
-    - target: {fileID: 4111166560652012554, guid: 7e4985016877a4246bd61e6523e63519, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
