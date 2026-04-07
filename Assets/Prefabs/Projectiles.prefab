@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3960159171357555176}
   m_Layer: 0
   m_Name: Projectiles
-  m_TagString: Untagged
+  m_TagString: Projectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d105c607d5ad05c47a3fa7aecce4705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileLogic
+  cooldownChangementColors: 0
   vitesseHorizontale: 0
   vitesseVerticale: 0
   distanceForDespawn: 0

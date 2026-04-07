@@ -4664,6 +4664,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 484947257774718802, guid: 7e4985016877a4246bd61e6523e63519, type: 3}
+      propertyPath: m_Color.b
+      value: 0.15218939
+      objectReference: {fileID: 0}
+    - target: {fileID: 484947257774718802, guid: 7e4985016877a4246bd61e6523e63519, type: 3}
+      propertyPath: m_Color.g
+      value: 0.15218939
+      objectReference: {fileID: 0}
+    - target: {fileID: 484947257774718802, guid: 7e4985016877a4246bd61e6523e63519, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5660378
+      objectReference: {fileID: 0}
     - target: {fileID: 813870015516572139, guid: 7e4985016877a4246bd61e6523e63519, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.17
@@ -4878,6 +4890,10 @@ PrefabInstance:
     - target: {fileID: 300588863311964362, guid: 9c8fb264634b7e343ba1a693b10767c2, type: 3}
       propertyPath: vitesseHorizontale
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 300588863311964362, guid: 9c8fb264634b7e343ba1a693b10767c2, type: 3}
+      propertyPath: cooldownChangementColors
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 934834106921398620, guid: 9c8fb264634b7e343ba1a693b10767c2, type: 3}
       propertyPath: m_LocalPosition.x
