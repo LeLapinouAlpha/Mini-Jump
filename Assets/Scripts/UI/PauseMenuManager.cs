@@ -10,9 +10,15 @@ public class PauseMenuManager : MonoBehaviour
     [Header("Input Actions")]
     private InputAction pauseAction;
 
+    public void DisplayContent(bool display)
+    {
+        this.content.SetActive(display);
+        Time.timeScale = display ? 0f : 1f;
+    }
+
     public void Resume()
     {
-        this.content.SetActive(false);
+        this.DisplayContent(false);
     }
 
     public void Settings()
@@ -36,7 +42,8 @@ public class PauseMenuManager : MonoBehaviour
     {
         if (this.pauseAction.WasPressedThisFrame())
         {
-            this.content.SetActive(true);
+            Debug.Log("Pause button pressed");
+            this.DisplayContent(true);
         }
     }
 }
