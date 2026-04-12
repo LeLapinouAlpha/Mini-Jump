@@ -4,8 +4,6 @@ using UnityEngine;
 public class DanceFloor : MonoBehaviour
 {
     public float danceDuration;
-    public float danceSpeed;
-    float counter;
     float timeLived;
     int index;
 
@@ -26,32 +24,24 @@ public class DanceFloor : MonoBehaviour
     {
         if (collision.CompareTag("Ennemies"))
         {
-            if (this.counter > this.danceSpeed)
+            switch (this.index)
             {
-                this.counter = 0;
-                switch (index)
-                {
-                    case 0:
-                        collision.GetComponent<SpriteRenderer>().flipX = true;
-                        index++;
-                        break;
-                    case 1:
-                        collision.GetComponent<SpriteRenderer>().flipY = true;
-                        index++;
-                        break;
-                    case 2:
-                        collision.GetComponent<SpriteRenderer>().flipX = false;
-                        index++;
-                        break;
-                    case 3:
-                        collision.GetComponent<SpriteRenderer>().flipY = false;
-                        this.index = 0;
-                        break;
-                }
-            }
-            else
-            {
-                this.counter += Time.deltaTime;
+                case 0:
+                    collision.GetComponent<SpriteRenderer>().flipX = true;
+                    this.index++;
+                    break;
+                case 1:
+                    collision.GetComponent<SpriteRenderer>().flipY = true;
+                    this.index++;
+                    break;
+                case 2:
+                    collision.GetComponent<SpriteRenderer>().flipX = false;
+                    this.index++;
+                    break;
+                case 3:
+                    collision.GetComponent<SpriteRenderer>().flipY = false;
+                    this.index = 0;
+                    break;
             }
         }
     }

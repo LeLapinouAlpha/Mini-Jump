@@ -91,4 +91,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a13bd0fc45834a870f049aba4f595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DanceFloor
-  danceDuration: 0
+  danceDuration: 10

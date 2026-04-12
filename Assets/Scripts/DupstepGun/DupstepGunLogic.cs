@@ -11,6 +11,7 @@ public class DupstepGunLogic : MonoBehaviour
     float counter;
 
     public Transform gunTransform;
+    public AudioSource audioSource;
     InputAction shootAction;
 
     bool isEquipped;
@@ -32,6 +33,7 @@ public class DupstepGunLogic : MonoBehaviour
     {
         if (this.isEquipped && this.shootAction.WasPressedThisFrame() && this.counter >= this.cooldown)
         {
+            audioSource.mute = false;
             GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, this.transform.rotation, this.transform);
             newGameObject.GetComponent<ProjectileLogic>().vitesseHorizontale = this.vitesseHorizontale;
             newGameObject.GetComponent<ProjectileLogic>().vitesseVerticale = this.vitesseVerticale;
