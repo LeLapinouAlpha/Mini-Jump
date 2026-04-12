@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d105c607d5ad05c47a3fa7aecce4705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileLogic
+  spawningObject: {fileID: 3359042045414002905, guid: a159fb7792f90a044a1350fe1c98a7a3, type: 3}
   cooldownChangementColors: 0
   vitesseHorizontale: 0
   vitesseVerticale: 0

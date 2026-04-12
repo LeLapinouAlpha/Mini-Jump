@@ -11,6 +11,7 @@ public class ProjectileLogic : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     System.Random random;
+    public GameObject spawningObject;
 
     float colorR;
     float colorG;
@@ -22,7 +23,6 @@ public class ProjectileLogic : MonoBehaviour
     public float vitesseHorizontale;
     public float vitesseVerticale;
     public float distanceForDespawn;
-
 
     bool moveRight;
 
@@ -57,15 +57,15 @@ public class ProjectileLogic : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         Move();
-
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Projectiles"))
+        if (!collision.CompareTag("Projectiles"))
         {
             this.spriteRenderer.enabled = false;
             this.GetComponent<Collider2D>().enabled = false;
+            GameObject newGameObject = Instantiate(this.spawningObject, this.transform.position, this.transform.rotation, this.transform);
+            this.GetComponent<ProjectileLogic>().enabled = false;
         }
     }
 
@@ -75,7 +75,6 @@ public class ProjectileLogic : MonoBehaviour
         {
             this.currentPositionX += this.vitesseHorizontale * Time.deltaTime;
             this.currentPositionY += this.vitesseVerticale * Time.deltaTime;
-
             this.transform.position = new Vector3(this.currentPositionX, this.currentPositionY, this.transform.position.z);
         }
         else

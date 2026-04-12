@@ -34,7 +34,7 @@ public class LoucheLogic : MonoBehaviour
 
         animationsScript = this.GetComponent<LoucheAnimations>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
-        collider2d = this.GetComponent<Collider2D>();
+        collider2d = this.GetComponentInChildren<Collider2D>();
         initialCollider2dOffset = collider2d.offset;
 
         canMove = true;

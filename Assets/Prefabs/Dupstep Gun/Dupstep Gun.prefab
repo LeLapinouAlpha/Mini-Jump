@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080269078543055314}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.70872545, w: -0.7054844}
-  m_LocalPosition: {x: 7.267, y: -1.778, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4180186592566978613
 SpriteRenderer:
   serializedVersion: 2
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 477537f834f756945b02139d332dc65a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a745c21dfa2c10745adc5a0d646d3aa7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,17 +127,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: -0.00055003166, y: -0.01929146}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.390625, y: 0.5}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 0.390625, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.390625, y: 0.5}
+  m_Size: {x: 1.2305036, y: 0.59125817}
   m_EdgeRadius: 0
 --- !u!114 &300588863311964362
 MonoBehaviour:
@@ -151,18 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817dea4a63572074397020f5957150b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DupstepGunLogic
-  musicDuration: 0
   cooldown: 0
+  distanceForDespawn: 50
   gunTransform: {fileID: 0}
-  shootAction:
-    m_Name: Shoot
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6d819e08-9126-432c-a288-0f7b59368870
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  spawningObject: {fileID: 0}
-  vitesse: 0
-  distanceForDespawn: 5
+  spawningObject: {fileID: 3460122996375441372, guid: 7e4985016877a4246bd61e6523e63519, type: 3}
+  vitesseHorizontale: 8
+  vitesseVerticale: -0.5
+  cooldownChangementColors: 0.1
