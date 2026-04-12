@@ -42,7 +42,6 @@ public class PauseMenuManager : MonoBehaviour
     {
         if (this.pauseAction.WasPressedThisFrame())
         {
-            Debug.Log("Pause button pressed");
             this.DisplayContent(true);
         }
     }
