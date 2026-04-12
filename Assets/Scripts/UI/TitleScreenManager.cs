@@ -6,10 +6,16 @@ public class TitleScreenManager : MonoBehaviour
 {
     [Header("Components References")]
     private TextMeshProUGUI versionTMP;
+    private TextMeshProUGUI companyTMP;
 
     private void DisplayVersion()
     {
-        this.versionTMP.text = Application.version.ToString();
+        this.versionTMP.text = Application.version;
+    }
+
+    public void DisplayCompany()
+    {
+        this.companyTMP.text = Application.companyName;
     }
 
     public void Play()
@@ -26,6 +32,8 @@ public class TitleScreenManager : MonoBehaviour
     void Start()
     {
         this.versionTMP = this.transform.Find("Version").GetComponent<TextMeshProUGUI>();
+        this.companyTMP = this.transform.Find("Company").GetComponent<TextMeshProUGUI>();
         this.DisplayVersion();
+        this.DisplayCompany();
     }
 }
