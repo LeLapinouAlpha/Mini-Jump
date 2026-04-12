@@ -47,7 +47,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -96,7 +96,8 @@ MonoBehaviour:
   initialTarget: {fileID: 0}
   target: {fileID: 0}
   collider: {fileID: 0}
-  cameraSize: 5
+  timesEntered: 0
+  isInArea: 0
 --- !u!1 &6829316742719154307
 GameObject:
   m_ObjectHideFlags: 0
