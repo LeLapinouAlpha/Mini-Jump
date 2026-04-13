@@ -33564,14 +33564,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114607612637363182, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -91.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 114607612637363182, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 937576921492112606, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: fallGravityScale
       value: 3
@@ -33582,11 +33574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2168938775681995269, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.51
+      value: 119.57
       objectReference: {fileID: 0}
     - target: {fileID: 2168938775681995269, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.05
+      value: 1.7729998
       objectReference: {fileID: 0}
     - target: {fileID: 2168938775681995269, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -33643,8 +33635,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3820632883852572431, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2089251778}
   m_SourcePrefab: {fileID: 100100000, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+--- !u!1 &93727648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3820632883852572431, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+  m_PrefabInstance: {fileID: 93727647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &102444617
 GameObject:
   m_ObjectHideFlags: 0
@@ -37468,7 +37468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b72fcf554d37634990b751f862b0d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  objectToFollow: {fileID: 1889705896}
+  objectToFollow: {fileID: 2089251770}
   followHorizontal: 1
   followVertical: 1
   timeOffset: 0.15
@@ -38747,6 +38747,7 @@ Tilemap:
       - {fileID: 21300000, guid: 75d386f1ae511134aaf6dc23991d28d4, type: 3}
       - {fileID: 21300000, guid: 7ebbb632e0fd575438e6e92bf06ad713, type: 3}
       m_AnimationSpeed: 20
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -27, z: 0}
@@ -38980,7 +38981,7 @@ Tilemap:
       - {fileID: 21300000, guid: eb4ea48c48f86394192bf6e1e4ff7550, type: 3}
       - {fileID: 21300000, guid: 75d386f1ae511134aaf6dc23991d28d4, type: 3}
       - {fileID: 21300000, guid: 7ebbb632e0fd575438e6e92bf06ad713, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -21, z: 0}
@@ -39136,7 +39137,7 @@ Tilemap:
       - {fileID: 21300000, guid: eb4ea48c48f86394192bf6e1e4ff7550, type: 3}
       - {fileID: 21300000, guid: 75d386f1ae511134aaf6dc23991d28d4, type: 3}
       - {fileID: 21300000, guid: 7ebbb632e0fd575438e6e92bf06ad713, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -17, z: 0}
@@ -39799,10 +39800,6 @@ PrefabInstance:
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 519420033}
-    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
-      propertyPath: initialTarget
-      value: 
-      objectReference: {fileID: 1889705896}
     - target: {fileID: 6086794489003779149, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: m_Name
       value: CameraAnchor (1)
@@ -46231,7 +46228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: cameraSize
-      value: 20
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: cameraFollow
@@ -92924,11 +92921,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
---- !u!4 &1889705896 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 114607612637363182, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
-  m_PrefabInstance: {fileID: 93727647}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1894648215
 GameObject:
   m_ObjectHideFlags: 0
@@ -93922,6 +93914,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!4 &2089251770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2168938775681995269, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+  m_PrefabInstance: {fileID: 93727647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2089251778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93727648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec03f13632bdb749913aa2d5d2fadef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  moneyHealth: 100
 --- !u!1 &2135028775
 GameObject:
   m_ObjectHideFlags: 0
