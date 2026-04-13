@@ -1,5 +1,6 @@
 {
     "version": 1,
+    "version": 1,
     "name": "InputSystem_Actions",
     "maps": [
         {
@@ -100,6 +101,15 @@
                     "name": "Shoot",
                     "type": "Button",
                     "id": "f052ca3d-6e91-4a45-812f-2de3e5d380a3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "3be88db3-c2e7-49b1-98a8-15a661d13887",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -494,6 +504,28 @@
                 },
                 {
                     "name": "",
+                    "id": "5974176c-ed49-4636-ae5a-4b727809c785",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b37544b-d658-44f1-80d3-7d1d387eaf22",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a7e49f02-e696-44ea-b2da-fdbd3f3da027",
                     "path": "",
                     "interactions": "",
@@ -566,7 +598,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "7607c7b6-cd76-4816-beef-bd0341cfe950",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -575,7 +607,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "15cef263-9014-4fd5-94d9-4e4a6234a6ef",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

@@ -22,12 +22,12 @@ public class HealthBar : MonoBehaviour
         textureCount = this.textures.Length - 1;
 
         this.maxHP = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().moneyHealth;
-        this.currentHP= maxHP;
+        this.currentHP = maxHP;
     }
 
     public void SetHP(float value)
     {
-        if (value <= 0) 
+        if (value <= 0)
         {
             this.currentHP = 0;
         }
@@ -35,7 +35,7 @@ public class HealthBar : MonoBehaviour
         {
             this.currentHP = value;
         }
-        if (value >= maxHP) 
+        if (value >= maxHP)
         {
             this.currentHP = maxHP;
         }
