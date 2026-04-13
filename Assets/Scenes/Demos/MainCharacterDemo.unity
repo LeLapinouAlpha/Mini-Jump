@@ -1168,6 +1168,7 @@ MonoBehaviour:
   followHorizontal: 1
   followVertical: 1
   timeOffset: 0.2
+  verticalOffset: 0
   pixelSnappingEnabled: 0
   pixelsPerUnit: 64
   followTargetPos: {x: 0, y: 0, z: 0}
@@ -5200,15 +5201,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3746263021913352270, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.258
+    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
+      propertyPath: cameraSize
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 3746263021913352270, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.354
-      objectReference: {fileID: 0}
-    - target: {fileID: 5078661870690564114, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
+      propertyPath: cameraFollow
+      value: 
+      objectReference: {fileID: 615123611}
+    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
+      propertyPath: initialTarget
+      value: 
+      objectReference: {fileID: 721962284}
+    - target: {fileID: 6086794489003779149, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
@@ -5269,7 +5274,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5168318911237680882, guid: 3aa8594aa23e2ad43b029240533552da, type: 3}
+    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
+      propertyPath: cameraSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072697656447333288, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
+      propertyPath: cameraFollow
+      value: 
+      objectReference: {fileID: 615123611}
+    - target: {fileID: 6086794489003779149, guid: 24cf6cf5d643b0140b93626870a191c7, type: 3}
       propertyPath: m_Name
       value: Louche
       objectReference: {fileID: 0}

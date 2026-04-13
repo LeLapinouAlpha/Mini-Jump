@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour
     public bool followHorizontal = true;
     public bool followVertical = false;
     public float timeOffset = 0f;
+    public float verticalOffset = 0f;
 
     [Header("Pixel Snapping Settings")]
     public bool pixelSnappingEnabled = false;
@@ -38,6 +39,7 @@ public class CameraFollow : MonoBehaviour
             );
 
             var pos = this.logicalPosition;
+            pos.y += this.verticalOffset;
 
             // Pixel snapping only for rendering
             if (this.pixelSnappingEnabled)
