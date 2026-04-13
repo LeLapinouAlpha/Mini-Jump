@@ -7,7 +7,6 @@ public class CameraAnchorFollow : MonoBehaviour
     public CameraFollow cameraFollow;
     public Transform initialTarget;
     public Transform target;
-    public Collider2D collider;
     private float initialCameraSize;
     public float cameraSize;
 
@@ -15,7 +14,6 @@ public class CameraAnchorFollow : MonoBehaviour
     {
         this.initialTarget = this.cameraFollow.objectToFollow;
         this.target = this.transform.GetChild(0);
-        this.collider = this.GetComponent<Collider2D>();
         this.initialCameraSize = this.cameraFollow.GetComponentInParent<Camera>().orthographicSize;
     }
 
