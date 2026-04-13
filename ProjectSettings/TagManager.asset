@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Flag
-  - Grotte
+  - Projectiles
+  - Ennemies
   layers:
   - Default
   - TransparentFX
@@ -52,11 +52,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Decor Foreground
-    uniqueID: 3650916419
-    locked: 0
-  - name: Projectiles
-    uniqueID: 232067049
+  - name: UI
+    uniqueID: 1358061915
     locked: 0
   m_RenderingLayers:
   - Default

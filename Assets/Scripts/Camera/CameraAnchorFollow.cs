@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class CameraAnchorFollow : MonoBehaviour
 {
     [Header("Components references")]
@@ -35,5 +36,6 @@ public class CameraAnchorFollow : MonoBehaviour
             this.cameraFollow.GetComponentInParent<Camera>().orthographicSize = this.initialCameraSize;
             this.cameraFollow.objectToFollow = this.initialTarget;
         }
+        
     }
 }
