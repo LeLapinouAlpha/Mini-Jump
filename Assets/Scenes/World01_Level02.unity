@@ -42674,7 +42674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b72fcf554d37634990b751f862b0d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  objectToFollow: {fileID: 1044503597}
+  objectToFollow: {fileID: 2012782166}
   followHorizontal: 1
   followVertical: 1
   timeOffset: 0.5
@@ -48035,11 +48035,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!4 &1044503597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2168938775681995269, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
-  m_PrefabInstance: {fileID: 1704903605}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1095734597
 GameObject:
   m_ObjectHideFlags: 0
@@ -59620,6 +59615,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114607612637363182, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 114607612637363182, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.37
+      objectReference: {fileID: 0}
     - target: {fileID: 937576921492112606, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
       propertyPath: canMove
       value: 1
@@ -89893,6 +89896,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!4 &2012782166 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 114607612637363182, guid: 95be8f042c373964794f3e3fcafd3fcd, type: 3}
+  m_PrefabInstance: {fileID: 1704903605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2026851739
 GameObject:
   m_ObjectHideFlags: 0
