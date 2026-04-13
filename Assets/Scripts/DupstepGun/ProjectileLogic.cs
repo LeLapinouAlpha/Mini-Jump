@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
-using UnityEngine.U2D;
 
 public class ProjectileLogic : MonoBehaviour
 {

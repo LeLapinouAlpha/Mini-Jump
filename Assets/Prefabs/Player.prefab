@@ -246,8 +246,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.001250108, y: 0.31468177}
-  m_Size: {x: 0.42373815, y: 0.62936354}
+  m_Offset: {x: 0, y: 0.30468747}
+  m_Size: {x: 0.40624997, y: 0.60937494}
   m_Direction: 0
 --- !u!114 &7061262411476875032
 MonoBehaviour:
@@ -273,7 +273,7 @@ MonoBehaviour:
   wallSlidingSpeed: 1
   groundLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   groundCheck: {fileID: 0}
   groundCheckRadius: 0.1
   wallLayers:
@@ -338,7 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec03f13632bdb749913aa2d5d2fadef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  healthBar: {fileID: 0}
   moneyHealth: 100
 --- !u!1 &7263344925355914060
 GameObject:
