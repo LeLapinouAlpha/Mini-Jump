@@ -1,8 +1,8 @@
 using UnityEngine;
-using System;
 
 public class BlobLogic : MonoBehaviour
 {
+    Transform parentTransform;
     public bool isRight;
 
     float currentPositionX;
@@ -16,6 +16,7 @@ public class BlobLogic : MonoBehaviour
         initialPositionX = this.transform.position.x;
         currentPositionX = this.transform.position.x;
 
+        parentTransform = GetComponentInParent<Transform>();
         vitesse = GetComponentInParent<LoucheLogic>().vitesseBlob;
         distanceForDespawn = GetComponentInParent<LoucheLogic>().distanceForDespawn;
     }
@@ -23,7 +24,7 @@ public class BlobLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Math.Abs(currentPositionX) >= Math.Abs(initialPositionX) + distanceForDespawn)
+        if (currentPositionX >= initialPositionX + distanceForDespawn)
         {
             this.gameObject.SetActive(false);
         }

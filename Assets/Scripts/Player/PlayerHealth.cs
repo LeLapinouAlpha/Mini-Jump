@@ -1,16 +1,10 @@
 using System;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    
-    /*
-     * TODO :
-     *  Faire les personnages et leurs animations
-     */
+    public float moneyHealth = 100f;
 
-    // TODO: Faire les ennemies
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

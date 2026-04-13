@@ -15,10 +15,7 @@ public class AttackPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             this.playerHealth.moneyHealth -= this.damage;
-            this.playerHealth.healthBar.SetHP(this.playerHealth.moneyHealth);
-            Debug.Log("The player's health is " + this.playerHealth.moneyHealth);
-        }
+        Debug.Log(this.playerHealth.moneyHealth);
     }
 }
